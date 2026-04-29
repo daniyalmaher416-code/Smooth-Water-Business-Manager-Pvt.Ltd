@@ -1,0 +1,3530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Smooth Vendor Management Pvt Ltd</title>
+<style>
+/* ═══════════════════════════════════════════════════
+   SMOOTH VENDOR MANAGEMENT — MASTER STYLESHEET
+   ═══════════════════════════════════════════════════ */
+:root {
+  /* Brand palette */
+  --primary:       #0a3d91;
+  --primary-md:    #1254c4;
+  --primary-lt:    #dce8ff;
+  --primary-glow:  rgba(18,84,196,.18);
+  --accent:        #0ea5e9;
+  --success:       #059669;
+  --success-lt:    #d1fae5;
+  --danger:        #dc2626;
+  --danger-lt:     #fee2e2;
+  --warning:       #d97706;
+  --warning-lt:    #fef3c7;
+  --purple:        #7c3aed;
+  --purple-lt:     #ede9fe;
+  --teal:          #0891b2;
+  --teal-lt:       #cffafe;
+  --orange:        #ea580c;
+  --orange-lt:     #ffedd5;
+  /* Layout */
+  --sidebar-w:     248px;
+  --sidebar-bg:    #060f24;
+  --sb-hover:      #0c1b3a;
+  --sb-active:     rgba(18,84,196,.22);
+  --topbar-h:      54px;
+  /* Neutrals */
+  --bg:            #f0f5ff;
+  --card:          #ffffff;
+  --border:        #e2e8f0;
+  --border-lt:     #f1f5f9;
+  --text:          #0f172a;
+  --t2:            #475569;
+  --t3:            #94a3b8;
+  /* Shadows */
+  --sh-xs: 0 1px 2px rgba(0,0,0,.05);
+  --sh-sm: 0 1px 4px rgba(0,0,0,.07);
+  --sh:    0 4px 16px rgba(0,0,0,.09);
+  --sh-lg: 0 12px 40px rgba(0,0,0,.13);
+  /* Radii */
+  --r-sm: 6px;
+  --r:    10px;
+  --r-lg: 15px;
+  --r-xl: 20px;
+  --tr:   .2s ease;
+}
+
+/* ── RESET ───────────────────────────────── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:15px; scroll-behavior:smooth; }
+body {
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg); color:var(--text);
+  display:flex; min-height:100vh; overflow-x:hidden;
+}
+
+/* ── SCROLLBAR ───────────────────────────── */
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+.sidebar {
+  width:var(--sidebar-w); background:var(--sidebar-bg);
+  position:fixed; top:0; left:0; height:100vh;
+  display:flex; flex-direction:column;
+  z-index:300; overflow-y:auto; flex-shrink:0;
+  border-right:1px solid rgba(255,255,255,.04);
+}
+.sb-brand {
+  padding:16px 18px 14px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  flex-shrink:0;
+}
+.sb-logo {
+  font-size:11px; font-weight:800; color:#fff;
+  line-height:1.4; letter-spacing:-.1px;
+}
+.sb-logo em { color:var(--accent); font-style:normal; }
+.sb-tagline {
+  font-size:9px; color:#1e3a5f; text-transform:uppercase;
+  letter-spacing:1.8px; margin-top:5px; font-weight:700;
+}
+.sb-nav { flex:1; padding:10px 0; }
+.sb-section-lbl {
+  font-size:9px; font-weight:800; text-transform:uppercase;
+  letter-spacing:1.8px; color:#1a3255;
+  padding:12px 18px 4px;
+}
+.nav-item {
+  display:flex; align-items:center; gap:10px;
+  padding:9px 18px; cursor:pointer;
+  color:#6a90b8; font-size:13px; font-weight:500;
+  transition:all var(--tr);
+  border-left:2.5px solid transparent;
+  user-select:none; border-radius:0;
+  position:relative;
+}
+.nav-item:hover { background:var(--sb-hover); color:#b8d0ea; }
+.nav-item.active {
+  background:var(--sb-active); color:#e0eeff;
+  border-left-color:var(--accent); font-weight:600;
+}
+.nav-item .ni { font-size:15px; width:20px; text-align:center; flex-shrink:0; }
+.sb-footer {
+  padding:14px 18px;
+  border-top:1px solid rgba(255,255,255,.05);
+  flex-shrink:0;
+}
+.sb-version { font-size:10px; color:#1a3255; margin-bottom:8px; }
+.btn-reset-all {
+  width:100%; padding:8px;
+  background:rgba(220,38,38,.09);
+  color:#f87171; border:1px solid rgba(220,38,38,.2);
+  border-radius:var(--r-sm); cursor:pointer;
+  font-size:12px; font-weight:600;
+  transition:all var(--tr);
+}
+.btn-reset-all:hover { background:rgba(220,38,38,.2); }
+
+/* ══════════════════════════════════════════
+   MAIN LAYOUT
+══════════════════════════════════════════ */
+.main { margin-left:var(--sidebar-w); flex:1; display:flex; flex-direction:column; min-width:0; }
+
+/* TOPBAR */
+.topbar {
+  background:var(--card); height:var(--topbar-h);
+  padding:0 24px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:200;
+  box-shadow:var(--sh-xs);
+  flex-shrink:0;
+}
+.topbar-left { display:flex; align-items:center; gap:14px; }
+.topbar-breadcrumb { font-size:11px; color:var(--t3); }
+.topbar-title { font-size:15px; font-weight:700; color:var(--text); }
+.topbar-right { display:flex; align-items:center; gap:12px; }
+.topbar-clock { font-size:12px; color:var(--t2); font-variant-numeric:tabular-nums; }
+.topbar-company {
+  font-size:12px; font-weight:700; color:var(--primary);
+  background:var(--primary-lt);
+  padding:4px 10px; border-radius:20px;
+}
+
+/* CONTENT */
+.content { padding:20px 24px; flex:1; overflow-y:auto; }
+
+/* ══════════════════════════════════════════
+   PAGES / SECTIONS
+══════════════════════════════════════════ */
+.page { display:none; animation:pgIn .22s ease; }
+.page.active { display:block; }
+@keyframes pgIn { from{opacity:0;transform:translateY(7px)} to{opacity:1;transform:translateY(0)} }
+
+/* ══════════════════════════════════════════
+   STAT CARDS
+══════════════════════════════════════════ */
+.stats-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:14px; margin-bottom:20px;
+}
+.stat-card {
+  background:var(--card); border-radius:var(--r-lg);
+  padding:18px 20px; box-shadow:var(--sh-sm);
+  border:1px solid var(--border-lt);
+  position:relative; overflow:hidden;
+  transition:all var(--tr); cursor:default;
+}
+.stat-card:hover { box-shadow:var(--sh); transform:translateY(-1px); }
+.stat-card::after {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:3px; border-radius:var(--r-lg) var(--r-lg) 0 0;
+}
+.sc-blue::after   { background:var(--primary-md); }
+.sc-green::after  { background:var(--success); }
+.sc-red::after    { background:var(--danger); }
+.sc-orange::after { background:var(--orange); }
+.sc-purple::after { background:var(--purple); }
+.sc-teal::after   { background:var(--teal); }
+.sc-accent::after { background:var(--accent); }
+.stat-icon { font-size:22px; margin-bottom:10px; display:block; }
+.stat-val {
+  font-size:22px; font-weight:800;
+  letter-spacing:-.8px; line-height:1;
+  margin-bottom:4px;
+}
+.stat-lbl {
+  font-size:10.5px; color:var(--t2); font-weight:600;
+  text-transform:uppercase; letter-spacing:.6px;
+}
+.stat-sub { font-size:11px; color:var(--t3); margin-top:3px; }
+
+/* Color utilities */
+.cv-blue   { color:var(--primary-md); }
+.cv-green  { color:var(--success);    }
+.cv-red    { color:var(--danger);     }
+.cv-orange { color:var(--orange);     }
+.cv-purple { color:var(--purple);     }
+.cv-teal   { color:var(--teal);       }
+.cv-accent { color:var(--accent);     }
+.cv-warn   { color:var(--warning);    }
+
+/* ══════════════════════════════════════════
+   CARDS
+══════════════════════════════════════════ */
+.card {
+  background:var(--card); border-radius:var(--r-lg);
+  padding:20px 22px; box-shadow:var(--sh-sm);
+  border:1px solid var(--border-lt); margin-bottom:18px;
+}
+.card-hdr {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:16px; flex-wrap:wrap; gap:10px;
+}
+.card-title {
+  font-size:14px; font-weight:700;
+  display:flex; align-items:center; gap:8px;
+}
+.card-title .ci { font-size:16px; }
+.card-actions { display:flex; gap:8px; flex-wrap:wrap; }
+
+/* ══════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════ */
+.btn {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:7px 15px; border-radius:var(--r);
+  font-size:13px; font-weight:600;
+  cursor:pointer; border:none;
+  transition:all var(--tr); white-space:nowrap;
+  font-family:inherit;
+}
+.btn:disabled { opacity:.5; cursor:not-allowed; }
+.btn-primary   { background:var(--primary-md); color:#fff; }
+.btn-primary:hover:not(:disabled)   { background:var(--primary); box-shadow:0 4px 14px var(--primary-glow); }
+.btn-success   { background:var(--success); color:#fff; }
+.btn-success:hover { background:#047857; }
+.btn-danger    { background:var(--danger); color:#fff; }
+.btn-danger:hover  { background:#b91c1c; }
+.btn-warning   { background:var(--warning); color:#fff; }
+.btn-warning:hover { background:#b45309; }
+.btn-outline   { background:transparent; color:var(--primary-md); border:1.5px solid var(--primary-md); }
+.btn-outline:hover { background:var(--primary-lt); }
+.btn-ghost     { background:transparent; color:var(--t2); border:1.5px solid var(--border); }
+.btn-ghost:hover   { background:var(--border-lt); color:var(--text); }
+.btn-accent    { background:var(--accent); color:#fff; }
+.btn-accent:hover  { background:#0284c7; }
+.btn-sm  { padding:5px 11px; font-size:12px; }
+.btn-xs  { padding:3px 8px;  font-size:11px; }
+.btn-icon{ padding:6px 9px;  }
+
+/* ══════════════════════════════════════════
+   TABLES
+══════════════════════════════════════════ */
+.tbl-wrap { overflow-x:auto; border-radius:var(--r); }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+thead th {
+  background:var(--border-lt); padding:9px 12px;
+  text-align:left; font-weight:700; font-size:10.5px;
+  text-transform:uppercase; letter-spacing:.6px;
+  color:var(--t2); border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+tbody td {
+  padding:9px 12px; border-bottom:1px solid var(--border-lt);
+  vertical-align:middle;
+}
+tbody tr:last-child td { border-bottom:none; }
+tbody tr { transition:background var(--tr); }
+tbody tr:hover td { background:#f8faff; }
+tbody tr.tr-danger td { background:var(--danger-lt); }
+tbody tr.tr-warn   td { background:var(--warning-lt); }
+.td-actions { display:flex; gap:5px; align-items:center; flex-wrap:wrap; }
+.rp { text-align:right; }
+.fw7 { font-weight:700; }
+.text-sm { font-size:12px; }
+.text-xs { font-size:11px; }
+.text-muted { color:var(--t2); }
+.text-mono { font-variant-numeric:tabular-nums; }
+
+/* ══════════════════════════════════════════
+   BADGES
+══════════════════════════════════════════ */
+.badge {
+  display:inline-block; padding:2px 8px;
+  border-radius:20px; font-size:11px; font-weight:700;
+}
+.badge-success { background:var(--success-lt); color:var(--success); }
+.badge-danger  { background:var(--danger-lt);  color:var(--danger);  }
+.badge-warning { background:var(--warning-lt); color:var(--warning); }
+.badge-info    { background:var(--primary-lt); color:var(--primary); }
+.badge-neutral { background:var(--border-lt);  color:var(--t2);      }
+.badge-purple  { background:var(--purple-lt);  color:var(--purple);  }
+.badge-teal    { background:var(--teal-lt);    color:var(--teal);    }
+
+/* ══════════════════════════════════════════
+   FORMS
+══════════════════════════════════════════ */
+.fg { margin-bottom:14px; }
+.fl {
+  display:block; font-size:12px; font-weight:600;
+  margin-bottom:5px; color:var(--text);
+}
+.fc {
+  width:100%; padding:8px 12px;
+  border:1.5px solid var(--border); border-radius:var(--r);
+  font-size:13px; color:var(--text); background:#fff;
+  outline:none; appearance:none; font-family:inherit;
+  transition:border-color var(--tr), box-shadow var(--tr);
+}
+.fc:focus { border-color:var(--primary-md); box-shadow:0 0 0 3px var(--primary-glow); }
+.fc::placeholder { color:var(--t3); }
+.fe { font-size:11px; color:var(--danger); margin-top:4px; }
+.fh { font-size:11px; color:var(--t3);    margin-top:3px; }
+.frow   { display:grid; grid-template-columns:1fr 1fr;   gap:12px; }
+.frow3  { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.frow4  { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:10px; }
+textarea.fc { resize:vertical; min-height:70px; }
+
+/* ══════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════ */
+.modal-backdrop {
+  position:fixed; inset:0;
+  background:rgba(6,15,36,.55);
+  z-index:1000; display:flex;
+  align-items:center; justify-content:center;
+  opacity:0; pointer-events:none;
+  transition:opacity .22s;
+  backdrop-filter:blur(3px);
+}
+.modal-backdrop.open { opacity:1; pointer-events:all; }
+.modal {
+  background:var(--card); border-radius:var(--r-xl);
+  padding:26px 28px; width:94%;
+  max-width:520px; max-height:92vh;
+  overflow-y:auto;
+  transform:scale(.95) translateY(12px);
+  transition:transform .22s;
+  box-shadow:var(--sh-lg);
+}
+.modal-lg  { max-width:700px; }
+.modal-xl  { max-width:860px; }
+.modal-backdrop.open .modal { transform:scale(1) translateY(0); }
+.modal-hdr {
+  display:flex; align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--border-lt);
+}
+.modal-title { font-size:16px; font-weight:700; }
+.modal-close {
+  width:30px; height:30px; border-radius:50%;
+  background:var(--bg); border:none; cursor:pointer;
+  font-size:15px; color:var(--t2);
+  display:flex; align-items:center; justify-content:center;
+  transition:all var(--tr);
+}
+.modal-close:hover { background:var(--border); }
+.modal-ftr {
+  display:flex; gap:10px; justify-content:flex-end;
+  margin-top:22px; padding-top:16px;
+  border-top:1px solid var(--border-lt);
+}
+
+/* ══════════════════════════════════════════
+   CONFIRM DIALOG
+══════════════════════════════════════════ */
+.confirm-backdrop {
+  position:fixed; inset:0;
+  background:rgba(6,15,36,.65);
+  z-index:5000; display:flex;
+  align-items:center; justify-content:center;
+  backdrop-filter:blur(5px);
+}
+.confirm-box {
+  background:var(--card); border-radius:var(--r-xl);
+  padding:30px; max-width:360px; width:94%;
+  text-align:center; box-shadow:var(--sh-lg);
+}
+.confirm-icon  { font-size:44px; margin-bottom:12px; }
+.confirm-title { font-size:16px; font-weight:800; margin-bottom:6px; }
+.confirm-msg   { font-size:13px; color:var(--t2); margin-bottom:22px; line-height:1.6; }
+.confirm-btns  { display:flex; gap:10px; justify-content:center; }
+
+/* ══════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════ */
+.toast-zone {
+  position:fixed; top:16px; right:16px;
+  z-index:9999; display:flex;
+  flex-direction:column; gap:8px;
+  pointer-events:none;
+}
+.toast {
+  background:var(--card); border-radius:var(--r-lg);
+  padding:12px 16px; box-shadow:var(--sh-lg);
+  display:flex; align-items:center; gap:10px;
+  font-size:13px; font-weight:500;
+  min-width:240px; max-width:320px;
+  pointer-events:all; border-left:4px solid;
+  animation:toastIn .32s cubic-bezier(.175,.885,.32,1.275);
+}
+@keyframes toastIn { from{transform:translateX(60px);opacity:0} to{transform:translateX(0);opacity:1} }
+.toast-success { border-color:var(--success); }
+.toast-error   { border-color:var(--danger);  }
+.toast-info    { border-color:var(--primary-md); }
+.toast-warning { border-color:var(--warning); }
+.toast-icon { font-size:17px; }
+.toast-msg  { flex:1; }
+
+/* ══════════════════════════════════════════
+   MULTI-PRODUCT ROW (Bills / Purchases)
+══════════════════════════════════════════ */
+.item-rows-wrap { margin-bottom:12px; }
+.item-row-hdr {
+  display:grid;
+  grid-template-columns:2.2fr 70px 90px 90px 32px;
+  gap:8px; padding:0 10px;
+  margin-bottom:5px;
+}
+.item-row-hdr span { font-size:10.5px; font-weight:700; color:var(--t2); text-transform:uppercase; }
+.item-row {
+  display:grid;
+  grid-template-columns:2.2fr 70px 90px 90px 32px;
+  gap:8px; align-items:center;
+  background:var(--border-lt); padding:9px 10px;
+  border-radius:var(--r); margin-bottom:7px;
+}
+.item-total {
+  font-size:13px; font-weight:700;
+  color:var(--primary-md); text-align:right;
+}
+.add-item-btn {
+  display:inline-flex; align-items:center; gap:5px;
+  font-size:12.5px; font-weight:600;
+  color:var(--primary-md); cursor:pointer;
+  background:none; border:none; padding:5px 0;
+  font-family:inherit;
+}
+.add-item-btn:hover { opacity:.75; }
+.del-row-btn {
+  width:28px; height:28px; border-radius:50%;
+  background:var(--danger-lt); color:var(--danger);
+  border:none; cursor:pointer; font-size:15px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:all var(--tr);
+}
+.del-row-btn:hover { background:var(--danger); color:#fff; }
+
+/* Bill summary bar */
+.bill-summary {
+  background:var(--primary-lt); border-radius:var(--r);
+  padding:12px 16px; display:flex; gap:18px;
+  flex-wrap:wrap; align-items:center; margin:10px 0;
+}
+.bs-lbl { font-size:11px; font-weight:600; color:var(--t2); margin-bottom:2px; }
+.bs-val { font-size:18px; font-weight:800; color:var(--primary); }
+.bs-val.danger { color:var(--danger); }
+
+/* ══════════════════════════════════════════
+   PROFILE HEADER
+══════════════════════════════════════════ */
+.profile-hdr {
+  background:linear-gradient(135deg,var(--primary) 0%,#1254c4 60%,#0ea5e9 100%);
+  border-radius:var(--r-xl); padding:24px 26px;
+  margin-bottom:18px; color:#fff;
+  box-shadow:var(--sh);
+}
+.ph-name   { font-size:22px; font-weight:800; letter-spacing:-.3px; }
+.ph-meta   { font-size:13px; opacity:.7; margin-top:4px; }
+.ph-stats  { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin-top:18px; }
+.phs {
+  background:rgba(255,255,255,.1);
+  border-radius:var(--r); padding:14px 16px;
+  backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,.12);
+}
+.phs-v { font-size:20px; font-weight:800; margin-bottom:2px; }
+.phs-l { font-size:10px; opacity:.7; text-transform:uppercase; letter-spacing:.8px; font-weight:600; }
+.phs-danger { background:rgba(220,38,38,.25); border-color:rgba(220,38,38,.3); }
+.phs-danger .phs-v { color:#fca5a5; }
+.phs-success { background:rgba(5,150,105,.2); border-color:rgba(5,150,105,.25); }
+.phs-success .phs-v { color:#6ee7b7; }
+
+/* ══════════════════════════════════════════
+   TABS
+══════════════════════════════════════════ */
+.tabs-nav {
+  display:flex; gap:1px; border-bottom:2px solid var(--border);
+  margin-bottom:18px; flex-wrap:wrap;
+}
+.tab-btn {
+  padding:8px 16px; cursor:pointer;
+  font-size:13px; font-weight:600; color:var(--t2);
+  border-bottom:2px solid transparent;
+  margin-bottom:-2px; background:none;
+  border-top:none; border-left:none; border-right:none;
+  transition:color var(--tr); font-family:inherit;
+}
+.tab-btn:hover { color:var(--primary-md); }
+.tab-btn.active { color:var(--primary-md); border-bottom-color:var(--primary-md); }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; animation:pgIn .2s ease; }
+
+/* ══════════════════════════════════════════
+   FILTER BAR
+══════════════════════════════════════════ */
+.filter-bar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+.search-wrap { position:relative; flex:1; min-width:150px; }
+.search-wrap input { padding-left:32px; }
+.search-icon {
+  position:absolute; left:9px; top:50%;
+  transform:translateY(-50%); font-size:14px;
+  pointer-events:none; color:var(--t3);
+}
+
+/* ══════════════════════════════════════════
+   INFO / WARN BOXES
+══════════════════════════════════════════ */
+.info-box {
+  background:var(--primary-lt);
+  border-left:3px solid var(--primary-md);
+  border-radius:var(--r-sm); padding:10px 14px;
+  font-size:12.5px; color:#1e40af; margin-bottom:14px;
+  line-height:1.5;
+}
+.warn-box {
+  background:var(--warning-lt);
+  border:1.5px solid #fcd34d;
+  border-radius:var(--r); padding:12px 16px;
+  display:flex; align-items:flex-start; gap:10px;
+  margin-bottom:14px; font-size:13px; color:#78350f;
+  font-weight:600;
+}
+.warn-icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+.danger-box {
+  background:var(--danger-lt);
+  border:1.5px solid #fca5a5;
+  border-radius:var(--r); padding:12px 16px;
+  display:flex; align-items:flex-start; gap:10px;
+  margin-bottom:14px; font-size:13px; color:#7f1d1d; font-weight:600;
+}
+
+/* ══════════════════════════════════════════
+   BOTTLE GRID
+══════════════════════════════════════════ */
+.bottle-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; }
+.bottle-card {
+  background:var(--card); border-radius:var(--r-lg);
+  padding:16px 18px; border:1px solid var(--border-lt);
+  box-shadow:var(--sh-sm); transition:box-shadow var(--tr);
+}
+.bottle-card:hover { box-shadow:var(--sh); }
+.bottle-name { font-size:14px; font-weight:700; margin-bottom:12px; }
+.b-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:6px 0; border-bottom:1px solid var(--border-lt);
+}
+.b-row:last-child { border-bottom:none; }
+.b-lbl { font-size:12px; color:var(--t2); }
+.b-val { font-size:14px; font-weight:700; }
+
+/* ══════════════════════════════════════════
+   BACK BUTTON
+══════════════════════════════════════════ */
+.back-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:13px; font-weight:600; color:var(--primary-md);
+  cursor:pointer; background:none; border:none;
+  padding:0; margin-bottom:14px; font-family:inherit;
+}
+.back-btn:hover { opacity:.75; }
+
+/* ══════════════════════════════════════════
+   DIVIDER / MISC
+══════════════════════════════════════════ */
+.divider { height:1px; background:var(--border-lt); margin:14px 0; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+.empty-state { text-align:center; padding:42px 20px; color:var(--t2); }
+.empty-icon  { font-size:44px; margin-bottom:10px; }
+.empty-msg   { font-size:13.5px; }
+.chip {
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 10px; border-radius:20px;
+  font-size:11.5px; font-weight:700;
+}
+select option { background:#fff; }
+
+/* ══════════════════════════════════════════
+   PRICE TABLE (Settings)
+══════════════════════════════════════════ */
+.price-card {
+  background:var(--card); border-radius:var(--r-lg);
+  padding:18px 20px; border:1px solid var(--border-lt);
+  box-shadow:var(--sh-sm);
+  display:flex; flex-direction:column; gap:12px;
+}
+.price-card-name { font-size:14px; font-weight:700; margin-bottom:4px; }
+.price-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.price-field label { font-size:11px; font-weight:600; color:var(--t2); display:block; margin-bottom:4px; }
+
+/* ══════════════════════════════════════════
+   PRINT / INVOICE
+══════════════════════════════════════════ */
+@media print {
+  body > *:not(.print-zone) { display:none !important; }
+  .print-zone { display:block !important; }
+  * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+.print-zone { display:none; }
+
+.invoice-paper {
+  width:100%; max-width:680px; margin:0 auto;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  color:#0f172a; background:#fff; font-size:13px;
+}
+.inv-header {
+  background:var(--primary);
+  color:#fff; padding:24px 28px;
+  border-radius:12px 12px 0 0;
+}
+.inv-company { font-size:20px; font-weight:800; letter-spacing:-.3px; }
+.inv-tagline { font-size:11px; opacity:.7; margin-top:3px; }
+.inv-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-top:16px; font-size:12px; opacity:.85; }
+.inv-body { padding:24px 28px; }
+.inv-cust-row { display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:20px; }
+.inv-cust-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--t2); margin-bottom:4px; }
+.inv-cust-val { font-size:14px; font-weight:700; }
+.inv-table { width:100%; border-collapse:collapse; margin-bottom:16px; }
+.inv-table th { background:#f1f5f9; padding:9px 12px; text-align:left; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--t2); border-bottom:2px solid var(--border); }
+.inv-table td { padding:9px 12px; border-bottom:1px solid #f1f5f9; font-size:13px; }
+.inv-table .rp { text-align:right; }
+.inv-total-section {
+  border-top:2px solid var(--border);
+  padding-top:14px; display:flex;
+  justify-content:flex-end;
+}
+.inv-total-box { min-width:200px; }
+.inv-total-row {
+  display:flex; justify-content:space-between;
+  padding:4px 0; font-size:13px;
+}
+.inv-grand { font-size:16px; font-weight:800; color:var(--primary); border-top:2px solid var(--border); padding-top:8px; margin-top:4px; }
+.inv-payment-note {
+  background:#f8faff; border-radius:8px;
+  padding:14px 16px; margin-top:14px;
+  border:1px solid var(--border);
+}
+.inv-footer { text-align:center; font-size:11px; color:var(--t2); padding:16px 28px; border-top:1px solid var(--border); }
+
+/* ══════════════════════════════════════════
+   MOBILE — HAMBURGER BUTTON
+══════════════════════════════════════════ */
+.mob-menu-btn {
+  display:none;
+  width:40px; height:40px;
+  border-radius:var(--r);
+  background:var(--primary-lt);
+  border:none; cursor:pointer;
+  align-items:center; justify-content:center;
+  font-size:22px; color:var(--primary);
+  transition:all var(--tr); flex-shrink:0;
+}
+.mob-menu-btn:active { background:var(--primary-md); color:#fff; transform:scale(.93); }
+
+/* Sidebar overlay */
+.sidebar-overlay {
+  position:fixed; inset:0;
+  background:rgba(6,15,36,.6);
+  z-index:290; display:none;
+  backdrop-filter:blur(3px);
+  transition:opacity .28s;
+}
+.sidebar-overlay.show { display:block; }
+
+/* ══════════════════════════════════════════
+   MOBILE — BOTTOM NAV
+══════════════════════════════════════════ */
+.bottom-nav {
+  display:none;
+  position:fixed; bottom:0; left:0; right:0;
+  background:var(--sidebar-bg);
+  border-top:1px solid rgba(255,255,255,.07);
+  z-index:400;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.bn-items {
+  display:grid; grid-template-columns:repeat(5,1fr);
+}
+.bn-item {
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:2px; padding:8px 4px 6px;
+  cursor:pointer; color:#3e6080;
+  font-size:9px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.4px;
+  border:none; background:none; font-family:inherit;
+  -webkit-tap-highlight-color:transparent;
+  transition:color .15s;
+}
+.bn-item.active { color:var(--accent); }
+.bn-item .bn-icon { font-size:22px; line-height:1; }
+
+/* More popup menu */
+.bn-more-menu {
+  display:none;
+  position:fixed; bottom:58px; left:0; right:0;
+  background:var(--sidebar-bg);
+  border-top:1px solid rgba(255,255,255,.07);
+  z-index:399;
+  box-shadow:0 -8px 32px rgba(0,0,0,.35);
+  border-radius:20px 20px 0 0;
+  padding:10px 0;
+}
+.bn-more-menu.show { display:block; }
+.bn-more-item {
+  display:flex; align-items:center; gap:14px;
+  padding:13px 22px; cursor:pointer;
+  color:#6a90b8; font-size:14px; font-weight:500;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .15s;
+}
+.bn-more-item:active { background:var(--sb-hover); color:#fff; }
+.bn-more-item .mi { font-size:20px; width:24px; text-align:center; }
+
+/* ══════════════════════════════════════════
+   TABLET  (≤ 900px)
+══════════════════════════════════════════ */
+@media(max-width:900px) {
+  .two-col, .three-col { grid-template-columns:1fr; }
+  .frow3, .frow4       { grid-template-columns:1fr 1fr; }
+  .item-row            { grid-template-columns:2fr 64px 84px 84px 32px; }
+  .stats-grid          { grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE  (≤ 640px)
+══════════════════════════════════════════ */
+@media(max-width:640px) {
+  html { font-size:14px; -webkit-text-size-adjust:100%; }
+
+  /* ── Sidebar slides from left ── */
+  :root { --sidebar-w:0px; --topbar-h:52px; }
+  .sidebar {
+    width:272px;
+    transform:translateX(-100%);
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+    box-shadow:none; z-index:300;
+  }
+  .sidebar.mob-open {
+    transform:translateX(0);
+    box-shadow:8px 0 32px rgba(0,0,0,.45);
+  }
+  .sidebar-overlay.show { display:block; }
+
+  /* ── Main ── */
+  .main { margin-left:0; }
+  .content {
+    padding:12px 12px 80px; /* bottom padding for nav bar */
+    min-height:calc(100vh - var(--topbar-h));
+  }
+
+  /* ── Topbar ── */
+  .topbar { padding:0 12px; height:52px; }
+  .topbar-left { gap:8px; }
+  .topbar-company { display:none; }
+  .mob-menu-btn { display:flex; }
+  .topbar-title { font-size:14px; font-weight:700; }
+  .topbar-clock { font-size:11px; }
+
+  /* ── Show bottom nav ── */
+  .bottom-nav { display:block; }
+
+  /* ── Stats grid ── */
+  .stats-grid {
+    grid-template-columns:1fr 1fr;
+    gap:9px; margin-bottom:12px;
+  }
+  .stat-card { padding:12px 12px; border-radius:12px; }
+  .stat-card::after { height:3px; }
+  .stat-icon { font-size:19px; margin-bottom:7px; }
+  .stat-val  { font-size:18px; letter-spacing:-.5px; }
+  .stat-lbl  { font-size:9px; letter-spacing:.4px; }
+  .stat-sub  { display:none; }
+
+  /* ── Cards ── */
+  .card { padding:13px 13px; margin-bottom:12px; border-radius:12px; }
+  .card-hdr {
+    flex-direction:column; align-items:flex-start;
+    gap:9px; margin-bottom:11px;
+  }
+  .card-title { font-size:13.5px; }
+  .card-actions { width:100%; display:flex; flex-wrap:wrap; gap:7px; }
+  .card-actions .btn { flex:1; min-width:100px; justify-content:center; font-size:12px; padding:7px 8px; }
+
+  /* ── Forms ── */
+  .frow, .frow3, .frow4 { grid-template-columns:1fr; gap:10px; }
+  .fg { margin-bottom:11px; }
+  .fl { font-size:11.5px; margin-bottom:4px; }
+  .fc {
+    padding:10px 11px; font-size:14px;
+    border-radius:9px;
+    /* Prevent zoom on iOS */
+    font-size:16px;
+  }
+  textarea.fc { min-height:80px; }
+
+  /* ── Tables ── */
+  .tbl-wrap {
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border-radius:9px;
+    margin:0 -1px;
+  }
+  table { min-width:520px; font-size:12px; }
+  thead th { padding:8px 10px; font-size:10px; }
+  tbody td  { padding:8px 10px; }
+  .td-actions { gap:4px; flex-wrap:nowrap; }
+  .btn-xs { padding:5px 8px; font-size:11px; }
+  .btn-sm { padding:7px 11px; font-size:12px; }
+
+  /* ── Multi-product item rows ── */
+  .item-row-hdr { display:none; }
+  .item-row {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:
+      "prod  prod"
+      "qty   price"
+      "total del";
+    gap:7px; padding:11px 10px;
+    border-radius:10px; margin-bottom:8px;
+    background:var(--border-lt);
+  }
+  .item-row select { grid-area:prod; }
+  .item-row input:nth-of-type(1) { grid-area:qty; }
+  .item-row input:nth-of-type(2) { grid-area:price; }
+  .item-total { grid-area:total; font-size:14px; font-weight:700; color:var(--primary-md); align-self:center; }
+  .del-row-btn { grid-area:del; justify-self:end; align-self:center; }
+
+  /* ── Bill summary ── */
+  .bill-summary {
+    flex-direction:column; gap:10px;
+    align-items:flex-start; padding:12px 13px;
+  }
+  .bill-summary > div:last-child {
+    width:100%; display:grid; grid-template-columns:1fr auto;
+    gap:12px; align-items:center; margin-left:0;
+  }
+  .bs-val { font-size:16px; }
+
+  /* ── Buttons ── */
+  .btn { border-radius:9px; }
+  .btn-primary, .btn-success, .btn-danger { min-height:40px; }
+
+  /* ── Profile header ── */
+  .profile-hdr { padding:16px 15px; border-radius:14px; margin-bottom:14px; }
+  .ph-name  { font-size:17px; }
+  .ph-meta  { font-size:12px; }
+  .ph-stats { grid-template-columns:1fr 1fr; gap:8px; margin-top:13px; }
+  .phs { padding:10px 11px; border-radius:9px; }
+  .phs-v { font-size:15px; }
+  .phs-l { font-size:9px; }
+
+  /* ── Profile action buttons ── */
+  [style*="display:flex"][style*="gap:9px"] {
+    flex-wrap:wrap !important;
+  }
+  [style*="display:flex"][style*="gap:9px"] .btn {
+    flex:1; min-width:100px; justify-content:center;
+  }
+
+  /* ── Tabs ── */
+  .tabs-nav {
+    overflow-x:auto; flex-wrap:nowrap;
+    -webkit-overflow-scrolling:touch;
+    gap:0; padding-bottom:0;
+    scrollbar-width:none;
+  }
+  .tabs-nav::-webkit-scrollbar { display:none; }
+  .tab-btn {
+    white-space:nowrap; flex-shrink:0;
+    padding:8px 13px; font-size:12px;
+    border-radius:0;
+  }
+
+  /* ── Modals — sheet from bottom ── */
+  .modal-backdrop { align-items:flex-end; }
+  .modal-backdrop .modal {
+    transform:translateY(100%);
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  .modal-backdrop.open .modal { transform:translateY(0); }
+  .modal {
+    padding:20px 16px;
+    width:100%; max-width:100%;
+    border-radius:20px 20px 0 0;
+    max-height:92vh;
+  }
+  .modal-lg, .modal-xl {
+    max-width:100%;
+    border-radius:20px 20px 0 0;
+  }
+  .modal-hdr {
+    margin-bottom:14px; padding-bottom:12px;
+  }
+  .modal-title { font-size:15px; }
+  .modal-ftr {
+    gap:8px; flex-wrap:wrap;
+    padding-top:14px; margin-top:16px;
+  }
+  .modal-ftr .btn { flex:1; justify-content:center; min-height:42px; }
+
+  /* ── Confirm box ── */
+  .confirm-backdrop { padding:14px; }
+  .confirm-box { padding:24px 18px; border-radius:18px; width:100%; }
+  .confirm-icon  { font-size:38px; }
+  .confirm-title { font-size:16px; }
+  .confirm-msg   { font-size:13px; }
+  .confirm-btns .btn { min-height:42px; flex:1; justify-content:center; }
+
+  /* ── Toast ── */
+  .toast-zone {
+    top:auto; bottom:66px;
+    left:10px; right:10px;
+  }
+  .toast { min-width:unset; width:100%; max-width:100%; border-radius:12px; }
+
+  /* ── Bottle & price grids ── */
+  .bottle-grid { grid-template-columns:1fr 1fr; gap:9px; }
+  .bottle-card { padding:11px 12px; border-radius:11px; }
+  .bottle-name { font-size:12.5px; margin-bottom:8px; }
+  .b-val { font-size:13px; }
+  .price-grid { grid-template-columns:1fr 1fr; gap:8px; }
+
+  /* ── Filter bar ── */
+  .filter-bar { gap:8px; }
+  .search-wrap { min-width:0; flex:1; }
+  .filter-bar select.fc { width:130px; font-size:14px; }
+
+  /* ── Two / three col ── */
+  .two-col, .three-col { grid-template-columns:1fr; gap:12px; }
+
+  /* ── Back button ── */
+  .back-btn { font-size:13px; margin-bottom:10px; }
+
+  /* ── Info / warning boxes ── */
+  .info-box  { font-size:12px; padding:9px 12px; }
+  .warn-box, .danger-box { font-size:12px; padding:10px 13px; }
+
+  /* ── Invoice ── */
+  .inv-header { padding:16px 16px; border-radius:10px 10px 0 0; }
+  .inv-company { font-size:16px; }
+  .inv-body { padding:14px 16px; }
+  .inv-cust-row { flex-direction:column; gap:10px; }
+  .inv-cust-row > div:last-child { text-align:left; }
+  .inv-payment-note > div[style*="grid-template-columns"] {
+    grid-template-columns:1fr 1fr !important;
+    gap:8px;
+  }
+
+  /* ── Chip / Badge ── */
+  .chip { font-size:10px; padding:3px 7px; }
+  .badge { font-size:10px; padding:2px 6px; }
+
+  /* ── Price card ── */
+  .price-card { padding:13px 14px; border-radius:12px; }
+  .price-card-name { font-size:13px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     SIDEBAR
+═══════════════════════════════════════════════════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sb-brand">
+    <div class="sb-logo">Smooth <em>Vendor</em><br>Management Pvt Ltd</div>
+    <div class="sb-tagline">Water Distribution ERP</div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-section-lbl">Overview</div>
+    <div class="nav-item active" data-page="dashboard">
+      <span class="ni">📊</span> Dashboard
+    </div>
+    <div class="sb-section-lbl">Purchasing</div>
+    <div class="nav-item" data-page="companies">
+      <span class="ni">🏭</span> Companies
+    </div>
+    <div class="sb-section-lbl">Sales</div>
+    <div class="nav-item" data-page="customers">
+      <span class="ni">👥</span> Customers
+    </div>
+    <div class="nav-item" data-page="bills">
+      <span class="ni">🧾</span> All Bills
+    </div>
+    <div class="sb-section-lbl">Tracking</div>
+    <div class="nav-item" data-page="stock">
+      <span class="ni">📦</span> Stock Manager
+    </div>
+    <div class="nav-item" data-page="mt-manager">
+      <span class="ni">🍶</span> MT Manager
+    </div>
+    <div class="sb-section-lbl">Finance</div>
+    <div class="nav-item" data-page="profit">
+      <span class="ni">💹</span> Profit & Revenue
+    </div>
+    <div class="nav-item" data-page="prices">
+      <span class="ni">🏷️</span> Price Settings
+    </div>
+    <div class="sb-section-lbl">System</div>
+    <div class="nav-item" data-page="settings">
+      <span class="ni">⚙️</span> Settings
+    </div>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-version">v2.0 · localStorage Edition</div>
+    <button class="btn-reset-all" onclick="doResetAll()">⚠️ Reset All Data</button>
+  </div>
+</nav>
+
+<!-- Sidebar Overlay (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobSidebar()"></div>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobSidebar()" aria-label="Menu">&#9776;</button>
+      <div class="topbar-company">Smooth Vendor Management Pvt Ltd</div>
+      <div class="topbar-title" id="pageTitle">Dashboard</div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-clock" id="clock">--:--</span>
+    </div>
+  </div>
+  <div class="content" id="mainContent"></div>
+</main>
+
+<!-- BOTTOM NAV (mobile only) -->
+<div class="bottom-nav" id="bottomNav">
+  <div class="bn-items">
+    <button class="bn-item active" data-page="dashboard" onclick="bnNav('dashboard')"><span class="bn-icon">📊</span><span>Home</span></button>
+    <button class="bn-item" data-page="customers" onclick="bnNav('customers')"><span class="bn-icon">👥</span><span>Customers</span></button>
+    <button class="bn-item" data-page="bills" onclick="bnNav('bills')"><span class="bn-icon">🧾</span><span>Bills</span></button>
+    <button class="bn-item" data-page="stock" onclick="bnNav('stock')"><span class="bn-icon">📦</span><span>Stock</span></button>
+    <button class="bn-item" id="bnMoreBtn" onclick="toggleBnMore()"><span class="bn-icon">&#9776;</span><span>More</span></button>
+  </div>
+</div>
+<div class="bn-more-menu" id="bnMoreMenu">
+  <div class="bn-more-item" onclick="bnNav('companies')"><span class="mi">🏭</span>Companies</div>
+  <div class="bn-more-item" onclick="bnNav('mt-manager')"><span class="mi">🍶</span>MT Manager</div>
+  <div class="bn-more-item" onclick="bnNav('profit')"><span class="mi">💹</span>Profit &amp; Revenue</div>
+  <div class="bn-more-item" onclick="bnNav('prices')"><span class="mi">🏷️</span>Price Settings</div>
+  <div class="bn-more-item" onclick="bnNav('settings')"><span class="mi">⚙️</span>Settings</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     TOAST ZONE
+═══════════════════════════════════════════════════ -->
+<div class="toast-zone" id="toastZone"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     PRINT ZONE (Invoice)
+═══════════════════════════════════════════════════ -->
+<div class="print-zone" id="printZone"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     MODALS (All modals rendered here)
+═══════════════════════════════════════════════════ -->
+
+<!-- Company Modal -->
+<div class="modal-backdrop" id="companyModal">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title" id="companyModalTitle">Add Company</div>
+      <button class="modal-close" onclick="closeModal('companyModal')">✕</button>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Company Name *</label>
+        <input class="fc" id="cm_name" placeholder="Supplier name">
+        <div class="fe" id="cm_name_e"></div>
+      </div>
+      <div class="fg">
+        <label class="fl">Phone</label>
+        <input class="fc" id="cm_phone" placeholder="Contact number">
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Address</label>
+      <input class="fc" id="cm_address" placeholder="Company address">
+    </div>
+    <div class="fg">
+      <label class="fl">Notes</label>
+      <input class="fc" id="cm_notes" placeholder="Optional notes">
+    </div>
+    <input type="hidden" id="cm_id">
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeModal('companyModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveCompany()">Save Company</button>
+    </div>
+  </div>
+</div>
+
+<!-- Purchase Modal -->
+<div class="modal-backdrop" id="purchaseModal">
+  <div class="modal modal-lg">
+    <div class="modal-hdr">
+      <div class="modal-title" id="purchaseModalTitle">New Purchase</div>
+      <button class="modal-close" onclick="closeModal('purchaseModal')">✕</button>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Company *</label>
+        <select class="fc" id="pur_company">
+          <option value="">Select company...</option>
+        </select>
+        <div class="fe" id="pur_company_e"></div>
+      </div>
+      <div class="fg">
+        <label class="fl">Date *</label>
+        <input type="datetime-local" class="fc" id="pur_date">
+      </div>
+    </div>
+    <label class="fl" style="margin-bottom:8px">Products *</label>
+    <div class="item-row-hdr">
+      <span>Product</span><span>Qty</span><span>Cost/Unit (₹)</span><span class="rp">Total</span><span></span>
+    </div>
+    <div class="item-rows-wrap" id="purRows"></div>
+    <button class="add-item-btn" onclick="addPurRow()">➕ Add Row</button>
+    <div class="bill-summary" style="margin-top:12px">
+      <div><div class="bs-lbl">Total Purchase Amount</div><div class="bs-val" id="purTotal">₹0.00</div></div>
+    </div>
+    <div class="fg">
+      <label class="fl">Note</label>
+      <input class="fc" id="pur_note" placeholder="Optional note">
+    </div>
+    <div class="fe" id="pur_err"></div>
+    <input type="hidden" id="pur_id">
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeModal('purchaseModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="savePurchase()">Save Purchase</button>
+    </div>
+  </div>
+</div>
+
+<!-- Company Payment Modal -->
+<div class="modal-backdrop" id="cpayModal">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title" id="cpayModalTitle">Pay to Company</div>
+      <button class="modal-close" onclick="closeModal('cpayModal')">✕</button>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Company</label>
+        <select class="fc" id="cpay_company">
+          <option value="">Select company...</option>
+        </select>
+        <div class="fe" id="cpay_company_e"></div>
+      </div>
+      <div class="fg">
+        <label class="fl">Amount (₹) *</label>
+        <input type="number" class="fc" id="cpay_amount" placeholder="0" min="0.01" step="0.01">
+        <div class="fe" id="cpay_amount_e"></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Date *</label>
+        <input type="datetime-local" class="fc" id="cpay_date">
+      </div>
+      <div class="fg">
+        <label class="fl">Reference</label>
+        <input class="fc" id="cpay_ref" placeholder="Cheque / UPI ref...">
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Note</label>
+      <input class="fc" id="cpay_note" placeholder="Optional note">
+    </div>
+    <input type="hidden" id="cpay_id">
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeModal('cpayModal')">Cancel</button>
+      <button class="btn btn-success" onclick="saveCompanyPayment()">Record Payment</button>
+    </div>
+  </div>
+</div>
+
+<!-- Customer Modal -->
+<div class="modal-backdrop" id="customerModal">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title" id="customerModalTitle">Add Customer</div>
+      <button class="modal-close" onclick="closeModal('customerModal')">✕</button>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Customer Name *</label>
+        <input class="fc" id="cu_name" placeholder="Full name">
+        <div class="fe" id="cu_name_e"></div>
+      </div>
+      <div class="fg">
+        <label class="fl">Phone</label>
+        <input class="fc" id="cu_phone" placeholder="Phone number">
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Address</label>
+      <input class="fc" id="cu_address" placeholder="Customer address">
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">MT Security Deposit (₹)</label>
+        <input type="number" class="fc" id="cu_deposit" placeholder="0" min="0" step="0.01">
+        <div class="fh">Refundable deposit for returnable bottles</div>
+      </div>
+      <div class="fg">
+        <label class="fl">Deposit Taken?</label>
+        <select class="fc" id="cu_deposit_taken">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Notes</label>
+      <input class="fc" id="cu_notes" placeholder="Optional notes">
+    </div>
+    <input type="hidden" id="cu_id">
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeModal('customerModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveCustomer()">Save Customer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bill Modal -->
+<div class="modal-backdrop" id="billModal">
+  <div class="modal modal-xl">
+    <div class="modal-hdr">
+      <div class="modal-title" id="billModalTitle">New Bill</div>
+      <button class="modal-close" onclick="closeModal('billModal')">✕</button>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Customer *</label>
+        <select class="fc" id="bl_customer">
+          <option value="">Select customer...</option>
+        </select>
+        <div class="fe" id="bl_customer_e"></div>
+      </div>
+      <div class="fg">
+        <label class="fl">Date *</label>
+        <input type="datetime-local" class="fc" id="bl_date">
+      </div>
+    </div>
+    <label class="fl" style="margin-bottom:8px">Products *</label>
+    <div class="item-row-hdr">
+      <span>Product</span><span>Qty</span><span>Sell Price (₹)</span><span class="rp">Total</span><span></span>
+    </div>
+    <div class="item-rows-wrap" id="billRows"></div>
+    <button class="add-item-btn" onclick="addBillRow()">➕ Add Row</button>
+    <div class="bill-summary" style="margin-top:12px">
+      <div>
+        <div class="bs-lbl">Grand Total</div>
+        <div class="bs-val" id="billGrandTotal">₹0.00</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;margin-left:auto;flex-wrap:wrap">
+        <div class="fg" style="margin:0">
+          <div class="bs-lbl">Amount Paid (₹)</div>
+          <input type="number" class="fc" id="bl_paid" placeholder="0" min="0" step="0.01"
+            oninput="updateBillSummary()" style="width:130px;margin-top:4px">
+        </div>
+        <div>
+          <div class="bs-lbl">Balance Due</div>
+          <div class="bs-val danger" id="billBalanceDue">₹0.00</div>
+        </div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Payment Status</label>
+        <select class="fc" id="bl_status">
+          <option value="unpaid">Unpaid</option>
+          <option value="partial">Partial</option>
+          <option value="paid">Paid</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">Note</label>
+        <input class="fc" id="bl_note" placeholder="Optional note">
+      </div>
+    </div>
+    <div class="fe" id="bl_err"></div>
+    <input type="hidden" id="bl_id">
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeModal('billModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveBill()">Save Bill</button>
+    </div>
+  </div>
+</div>
+
+<!-- Customer Payment Modal -->
+<div class="modal-backdrop" id="custPayModal">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title" id="custPayModalTitle">Record Payment</div>
+      <button class="modal-close" onclick="closeModal('custPayModal')">✕</button>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Customer</label>
+        <select class="fc" id="cspay_customer">
+          <option value="">Select customer...</option>
+        </select>
+        <div class="fe" id="cspay_customer_e"></div>
+      </div>
+      <div class="fg">
+        <label class="fl">Amount (₹) *</label>
+        <input type="number" class="fc" id="cspay_amount" placeholder="0" min="0.01" step="0.01">
+        <div class="fe" id="cspay_amount_e"></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Date *</label>
+        <input type="datetime-local" class="fc" id="cspay_date">
+      </div>
+      <div class="fg">
+        <label class="fl">Mode</label>
+        <select class="fc" id="cspay_mode">
+          <option value="cash">Cash</option>
+          <option value="upi">UPI</option>
+          <option value="bank">Bank Transfer</option>
+          <option value="cheque">Cheque</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Reference / Note</label>
+      <input class="fc" id="cspay_note" placeholder="Transaction reference, note...">
+    </div>
+    <input type="hidden" id="cspay_id">
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeModal('custPayModal')">Cancel</button>
+      <button class="btn btn-success" onclick="saveCustPayment()">Record Payment</button>
+    </div>
+  </div>
+</div>
+
+<!-- MT Return Modal -->
+<div class="modal-backdrop" id="mtModal">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title" id="mtModalTitle">Record MT Return</div>
+      <button class="modal-close" onclick="closeModal('mtModal')">✕</button>
+    </div>
+    <div class="info-box">Customer returns empty (MT) bottles. MT stock increases; customer bottle balance decreases.</div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Customer *</label>
+        <select class="fc" id="mt_customer" onchange="updateMTBalanceInfo()">
+          <option value="">Select customer...</option>
+        </select>
+        <div class="fe" id="mt_customer_e"></div>
+      </div>
+      <div class="fg">
+        <label class="fl">Product *</label>
+        <select class="fc" id="mt_product" onchange="updateMTBalanceInfo()">
+          <option value="">Select product...</option>
+        </select>
+        <div class="fe" id="mt_product_e"></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Quantity *</label>
+        <input type="number" class="fc" id="mt_qty" placeholder="0" min="1">
+        <div class="fe" id="mt_qty_e"></div>
+      </div>
+      <div class="fg">
+        <label class="fl">Date *</label>
+        <input type="datetime-local" class="fc" id="mt_date">
+      </div>
+    </div>
+    <div class="info-box" id="mt_balance_info" style="display:none"></div>
+    <div class="fg">
+      <label class="fl">Note</label>
+      <input class="fc" id="mt_note" placeholder="Optional note">
+    </div>
+    <input type="hidden" id="mt_id">
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeModal('mtModal')">Cancel</button>
+      <button class="btn btn-success" onclick="saveMTReturn()">Record Return</button>
+    </div>
+  </div>
+</div>
+
+<!-- Stock Adjust Modal -->
+<div class="modal-backdrop" id="stockAdjModal">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title">📦 Adjust Stock</div>
+      <button class="modal-close" onclick="closeModal('stockAdjModal')">✕</button>
+    </div>
+    <div class="info-box">Use for initial setup or manual corrections only. All normal transactions auto-update stock.</div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Product *</label>
+        <select class="fc" id="adj_product" onchange="onAdjProductChange()">
+          <option value="">Select product...</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">Stock Field *</label>
+        <select class="fc" id="adj_field">
+          <option value="filled">Filled Stock</option>
+          <option value="mt">MT (Empty) Stock</option>
+          <option value="market">Market Stock</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Action</label>
+        <select class="fc" id="adj_action">
+          <option value="set">Set to value</option>
+          <option value="add">Add to current</option>
+          <option value="sub">Subtract from current</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">Quantity *</label>
+        <input type="number" class="fc" id="adj_qty" min="0" placeholder="0">
+      </div>
+    </div>
+    <div class="info-box" id="adj_info" style="display:none"></div>
+    <div class="fe" id="adj_err"></div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeModal('stockAdjModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="applyStockAdj()">Apply Adjustment</button>
+    </div>
+  </div>
+</div>
+
+<!-- Invoice Preview Modal -->
+<div class="modal-backdrop" id="invoiceModal">
+  <div class="modal modal-xl" style="padding:0;overflow:hidden">
+    <div style="padding:16px 20px;background:var(--border-lt);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)">
+      <span style="font-weight:700;font-size:14px">📄 Invoice Preview</span>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-primary btn-sm" onclick="printInvoice()">🖨️ Print</button>
+        <button class="btn btn-success btn-sm" onclick="downloadInvoicePDF()">⬇️ Download PDF</button>
+        <button class="modal-close" onclick="closeModal('invoiceModal')">✕</button>
+      </div>
+    </div>
+    <div style="padding:24px;max-height:80vh;overflow-y:auto" id="invoicePreviewBody">
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT — COMPLETE BUSINESS LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+'use strict';
+/* =====================================================
+   1. CONSTANTS — Products, IDs, Maps
+   ===================================================== */
+const PRODUCTS = [
+  { id:'p_1l5ag',  name:'1.5L A G',   returnable:false },
+  { id:'p_1l5bg',  name:'1.5L B G',   returnable:false },
+  { id:'p_500ag',  name:'500ml A G',  returnable:false },
+  { id:'p_500bg',  name:'500ml B G',  returnable:false },
+  { id:'p_19l',    name:'19L',        returnable:true  },
+  { id:'p_12l',    name:'12L',        returnable:true  },
+  { id:'p_6l',     name:'6L',         returnable:true  },
+];
+const PROD_MAP     = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+const RET_PRODS    = PRODUCTS.filter(p => p.returnable);
+const RET_IDS      = RET_PRODS.map(p => p.id);
+const ALL_OPTS     = PRODUCTS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+const RET_OPTS     = RET_PRODS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+const PAY_STATUS   = { paid:'badge-success', partial:'badge-warning', unpaid:'badge-danger' };
+
+/* =====================================================
+   2. LOCAL STORAGE — Typed Data Layer
+   ===================================================== */
+const LS = {
+  get: (k, fb = null) => {
+    try { const v = localStorage.getItem(k); return v === null ? fb : JSON.parse(v); }
+    catch { return fb; }
+  },
+  set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) { console.error(e); } }
+};
+
+// Initialise stock to ensure all product keys exist
+function ensureStock() {
+  const s = LS.get('svm_stock', {});
+  PRODUCTS.forEach(p => {
+    if (!s[p.id]) {
+      s[p.id] = p.returnable ? { filled: 0, mt: 0, market: 0 } : { filled: 0 };
+    }
+  });
+  LS.set('svm_stock', s);
+  return s;
+}
+// Initialise prices
+function ensurePrices() {
+  const pr = LS.get('svm_prices', {});
+  PRODUCTS.forEach(p => {
+    if (!pr[p.id]) pr[p.id] = { purchasePrice: 0, sellingPrice: 0 };
+  });
+  LS.set('svm_prices', pr);
+  return pr;
+}
+
+/* Typed accessors */
+const getStock         = () => LS.get('svm_stock', {});
+const setStock         = s => LS.set('svm_stock', s);
+const getPrices        = () => LS.get('svm_prices', {});
+const setPrices        = p => LS.set('svm_prices', p);
+const getCompanies     = () => LS.get('svm_companies', []);
+const setCompanies     = d => LS.set('svm_companies', d);
+const getPurchases     = () => LS.get('svm_purchases', []);
+const setPurchases     = d => LS.set('svm_purchases', d);
+const getCompPays      = () => LS.get('svm_cpays', []);
+const setCompPays      = d => LS.set('svm_cpays', d);
+const getCustomers     = () => LS.get('svm_customers', []);
+const setCustomers     = d => LS.set('svm_customers', d);
+const getBills         = () => LS.get('svm_bills', []);
+const setBills         = d => LS.set('svm_bills', d);
+const getCustPays      = () => LS.get('svm_custpays', []);
+const setCustPays      = d => LS.set('svm_custpays', d);
+const getMTReturns     = () => LS.get('svm_mt', []);
+const setMTReturns     = d => LS.set('svm_mt', d);
+const getSettings      = () => LS.get('svm_settings', { companyName: 'Smooth Vendor Management Pvt Ltd', address: '', phone: '', gst: '' });
+const setSettings      = d => LS.set('svm_settings', d);
+
+/* =====================================================
+   3. STOCK HELPERS
+   ===================================================== */
+function stockGet(pid, field) {
+  const s = getStock();
+  return (s[pid] && s[pid][field] !== undefined) ? (s[pid][field] || 0) : 0;
+}
+function stockMod(pid, field, delta) {
+  const s = getStock();
+  if (!s[pid]) s[pid] = PROD_MAP[pid].returnable ? { filled: 0, mt: 0, market: 0 } : { filled: 0 };
+  s[pid][field] = Math.max(0, (s[pid][field] || 0) + delta);
+  setStock(s);
+}
+function stockSet(pid, field, val) {
+  const s = getStock();
+  if (!s[pid]) s[pid] = PROD_MAP[pid].returnable ? { filled: 0, mt: 0, market: 0 } : { filled: 0 };
+  s[pid][field] = Math.max(0, val);
+  setStock(s);
+}
+
+/* =====================================================
+   4. FINANCIAL CALCULATIONS
+   ===================================================== */
+/** Customer: total amount across all bills */
+function custTotalBilled(cid) {
+  return getBills().filter(b => b.customerId === cid).reduce((s, b) => s + (b.totalAmount || 0), 0);
+}
+/** Customer: total paid (bill initial payments + separate payments) */
+function custTotalPaid(cid) {
+  const billPaid  = getBills().filter(b => b.customerId === cid).reduce((s, b) => s + (b.paidAmount || 0), 0);
+  const extraPaid = getCustPays().filter(p => p.customerId === cid).reduce((s, p) => s + (p.amount || 0), 0);
+  return billPaid + extraPaid;
+}
+/** Customer: outstanding balance */
+function custBalance(cid) { return custTotalBilled(cid) - custTotalPaid(cid); }
+
+/** Bottle balance for customer×product */
+function custBottleBalance(cid, pid) {
+  const given    = getBills().filter(b => b.customerId === cid)
+    .reduce((s, b) => s + (b.items.find(i => i.productId === pid)?.qty || 0), 0);
+  const returned = getMTReturns().filter(r => r.customerId === cid && r.productId === pid)
+    .reduce((s, r) => s + r.qty, 0);
+  return given - returned;
+}
+
+/** Company: total purchase amount */
+function compTotalPurchased(cid) {
+  return getPurchases().filter(p => p.companyId === cid).reduce((s, p) => s + (p.totalAmount || 0), 0);
+}
+/** Company: total paid */
+function compTotalPaid(cid) {
+  return getCompPays().filter(p => p.companyId === cid).reduce((s, p) => s + (p.amount || 0), 0);
+}
+/** Company: remaining payable */
+function compBalance(cid) { return compTotalPurchased(cid) - compTotalPaid(cid); }
+
+/** Global profit calculation */
+function calcGlobalProfit() {
+  const prices = getPrices();
+  let totalRevenue = 0, totalCost = 0;
+  getBills().forEach(b => {
+    b.items.forEach(item => {
+      const pr = prices[item.productId] || {};
+      const sp = item.sellingPrice || pr.sellingPrice || 0;
+      const pp = pr.purchasePrice || 0;
+      totalRevenue += sp * item.qty;
+      totalCost    += pp * item.qty;
+    });
+  });
+  return { totalRevenue, totalCost, totalProfit: totalRevenue - totalCost };
+}
+
+/* =====================================================
+   5. UTILITY FUNCTIONS
+   ===================================================== */
+const genId = () => Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+
+const fmt = {
+  currency: v => `₹${(+v || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+  num:      v => (+v || 0).toLocaleString('en-IN'),
+  dt:       iso => { try { return new Date(iso).toLocaleString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }); } catch { return iso; } },
+  dateOnly: iso => { try { return new Date(iso).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }); } catch { return iso; } },
+  inputDT:  iso => { try { const d = new Date(iso); const p = n => String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`; } catch { return ''; } },
+};
+const nowDT = () => fmt.inputDT(new Date().toISOString());
+const billIdDisplay = id => '#' + (id || '').slice(-7).toUpperCase();
+
+/* =====================================================
+   6. TOAST SYSTEM
+   ===================================================== */
+function toast(msg, type = 'info') {
+  const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
+  const el = document.createElement('div');
+  el.className = `toast toast-${type}`;
+  el.innerHTML = `<span class="toast-icon">${icons[type]}</span><span class="toast-msg">${msg}</span>`;
+  document.getElementById('toastZone').appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateX(60px)'; el.style.transition = '.3s ease'; setTimeout(() => el.remove(), 310); }, 3400);
+}
+
+/* =====================================================
+   7. CONFIRM DIALOG
+   ===================================================== */
+function confirm2(title, msg, okLabel = 'Confirm', okClass = 'btn-danger') {
+  return new Promise(resolve => {
+    const el = document.createElement('div');
+    el.className = 'confirm-backdrop';
+    el.innerHTML = `<div class="confirm-box">
+      <div class="confirm-icon">⚠️</div>
+      <div class="confirm-title">${title}</div>
+      <div class="confirm-msg">${msg}</div>
+      <div class="confirm-btns">
+        <button class="btn btn-ghost" id="cNo">Cancel</button>
+        <button class="btn ${okClass}" id="cYes">${okLabel}</button>
+      </div>
+    </div>`;
+    document.body.appendChild(el);
+    el.querySelector('#cNo').onclick  = () => { el.remove(); resolve(false); };
+    el.querySelector('#cYes').onclick = () => { el.remove(); resolve(true); };
+  });
+}
+
+/* =====================================================
+   8. MODAL HELPERS
+   ===================================================== */
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('modal-backdrop')) closeModal(e.target.id);
+});
+
+/* =====================================================
+   9. NAVIGATION
+   ===================================================== */
+const PAGE_LABELS = {
+  dashboard: 'Dashboard', companies: 'Companies', 'company-profile': 'Company Profile',
+  customers: 'Customers', 'customer-profile': 'Customer Profile',
+  bills: 'All Bills', stock: 'Stock Manager', 'mt-manager': 'MT Manager',
+  profit: 'Profit & Revenue', prices: 'Price Settings', settings: 'Settings'
+};
+let currentPage = 'dashboard';
+let viewState   = {};
+
+function navigate(page, state = {}) {
+  currentPage = page; viewState = state;
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page === page));
+  document.getElementById('pageTitle').textContent = PAGE_LABELS[page] || page;
+  // Close mobile sidebar when navigating
+  closeMobSidebar();
+  // Sync bottom nav
+  if (typeof syncBottomNav === 'function') syncBottomNav(page);
+  renderPage(page, state);
+  // Scroll content to top
+  const mc = document.getElementById('mainContent');
+  if (mc) mc.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+function renderPage(page, state = {}) {
+  switch (page) {
+    case 'dashboard':         renderDashboard();                    break;
+    case 'companies':         renderCompanies();                    break;
+    case 'company-profile':   renderCompanyProfile(state.id);       break;
+    case 'customers':         renderCustomers();                    break;
+    case 'customer-profile':  renderCustomerProfile(state.id);      break;
+    case 'bills':             renderBills();                        break;
+    case 'stock':             renderStock();                        break;
+    case 'mt-manager':        renderMTManager();                    break;
+    case 'profit':            renderProfit();                       break;
+    case 'prices':            renderPrices();                       break;
+    case 'settings':          renderSettings();                     break;
+  }
+}
+
+document.querySelectorAll('.nav-item[data-page]').forEach(el => {
+  el.addEventListener('click', () => navigate(el.dataset.page));
+});
+
+/* =====================================================
+   10. DASHBOARD
+   ===================================================== */
+function renderDashboard() {
+  const mc = document.getElementById('mainContent');
+  const stock     = getStock();
+  const customers = getCustomers();
+  const companies = getCompanies();
+
+  // Totals
+  let totalFilled = 0, totalMT = 0, totalMarket = 0;
+  PRODUCTS.forEach(p => {
+    const s = stock[p.id] || {};
+    totalFilled += s.filled || 0;
+    if (p.returnable) { totalMT += s.mt || 0; totalMarket += s.market || 0; }
+  });
+
+  const totalReceivable = customers.reduce((s, c) => s + Math.max(0, custBalance(c.id)), 0);
+  const totalPayable    = companies.reduce((s, c) => s + Math.max(0, compBalance(c.id)), 0);
+  const { totalRevenue, totalCost, totalProfit } = calcGlobalProfit();
+
+  // Warnings
+  let warnings = '';
+  customers.forEach(c => {
+    RET_IDS.forEach(pid => {
+      const bal = custBottleBalance(c.id, pid);
+      if (bal > 10) {
+        warnings += `<div class="warn-box"><span class="warn-icon">⚠️</span><div><strong>${c.name}</strong> has ${bal} ${PROD_MAP[pid].name} bottles pending return. High outstanding!</div></div>`;
+      }
+    });
+  });
+  PRODUCTS.forEach(p => {
+    const s = stock[p.id] || {};
+    if ((s.filled || 0) < 0) {
+      warnings += `<div class="danger-box"><span class="warn-icon">🔴</span><div>Negative stock detected for <strong>${p.name}</strong>. Please review transactions.</div></div>`;
+    }
+  });
+
+  // Recent bills
+  const recentBills = getBills().slice(-6).reverse();
+  const recentBillsHTML = recentBills.length
+    ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Date</th><th>Customer</th><th>Total</th><th>Paid</th><th>Status</th></tr></thead>
+        <tbody>${recentBills.map(b => {
+          const c = customers.find(c => c.id === b.customerId);
+          return `<tr>
+            <td class="text-sm">${fmt.dateOnly(b.date)}</td>
+            <td class="fw7">${c?.name || '—'}</td>
+            <td class="fw7">${fmt.currency(b.totalAmount)}</td>
+            <td class="cv-green fw7">${fmt.currency(b.paidAmount)}</td>
+            <td><span class="badge ${PAY_STATUS[b.paymentStatus] || 'badge-neutral'}">${b.paymentStatus}</span></td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table></div>`
+    : `<div class="empty-state"><div class="empty-icon">🧾</div><p class="empty-msg">No bills yet</p></div>`;
+
+  mc.innerHTML = `
+  ${warnings}
+  <div class="stats-grid">
+    <div class="stat-card sc-blue">
+      <span class="stat-icon">📦</span>
+      <div class="stat-val cv-blue">${totalFilled}</div>
+      <div class="stat-lbl">Total Filled Stock</div>
+      <div class="stat-sub">All products</div>
+    </div>
+    <div class="stat-card sc-orange">
+      <span class="stat-icon">🪣</span>
+      <div class="stat-val cv-orange">${totalMT}</div>
+      <div class="stat-lbl">Total MT Stock</div>
+      <div class="stat-sub">Empty bottles</div>
+    </div>
+    <div class="stat-card sc-accent">
+      <span class="stat-icon">🌍</span>
+      <div class="stat-val cv-accent">${totalMarket}</div>
+      <div class="stat-lbl">Market Bottles</div>
+      <div class="stat-sub">With customers</div>
+    </div>
+    <div class="stat-card sc-green">
+      <span class="stat-icon">💰</span>
+      <div class="stat-val cv-green">${fmt.currency(totalRevenue)}</div>
+      <div class="stat-lbl">Total Revenue</div>
+      <div class="stat-sub">${getBills().length} bills</div>
+    </div>
+    <div class="stat-card sc-teal">
+      <span class="stat-icon">💹</span>
+      <div class="stat-val" style="color:var(--teal)">${fmt.currency(totalProfit)}</div>
+      <div class="stat-lbl">Total Profit</div>
+      <div class="stat-sub">Revenue − Cost</div>
+    </div>
+    <div class="stat-card sc-red">
+      <span class="stat-icon">📤</span>
+      <div class="stat-val cv-red">${fmt.currency(totalReceivable)}</div>
+      <div class="stat-lbl">Customer Receivable</div>
+      <div class="stat-sub">${customers.length} customers</div>
+    </div>
+    <div class="stat-card sc-purple">
+      <span class="stat-icon">🏭</span>
+      <div class="stat-val cv-purple">${fmt.currency(totalPayable)}</div>
+      <div class="stat-lbl">Company Payable</div>
+      <div class="stat-sub">${companies.length} suppliers</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-title"><span class="ci">🧾</span> Recent Bills</div>
+        <button class="btn btn-outline btn-sm" onclick="navigate('bills')">View All</button>
+      </div>
+      ${recentBillsHTML}
+    </div>
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-title"><span class="ci">📦</span> Stock Snapshot</div>
+        <button class="btn btn-outline btn-sm" onclick="navigate('stock')">Manage</button>
+      </div>
+      ${renderStockSnapshot()}
+    </div>
+  </div>`;
+}
+
+function renderStockSnapshot() {
+  const stock = getStock();
+  return PRODUCTS.map(p => {
+    const s = stock[p.id] || {};
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border-lt)">
+      <span class="text-sm fw7">${p.name}</span>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span class="chip" style="background:var(--success-lt);color:var(--success)">F:${s.filled||0}</span>
+        ${p.returnable ? `<span class="chip" style="background:var(--warning-lt);color:var(--warning)">MT:${s.mt||0}</span><span class="chip" style="background:var(--primary-lt);color:var(--primary)">Mkt:${s.market||0}</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* =====================================================
+   11. COMPANIES PAGE
+   ===================================================== */
+function renderCompanies() {
+  const companies  = getCompanies();
+  const q          = document.getElementById('comp-search')?.value?.toLowerCase() || '';
+  const filtered   = q ? companies.filter(c => c.name.toLowerCase().includes(q) || (c.phone||'').includes(q)) : companies;
+
+  const rows = filtered.map((c, i) => {
+    const purchased = compTotalPurchased(c.id);
+    const paid      = compTotalPaid(c.id);
+    const balance   = purchased - paid;
+    return `<tr class="${balance > 0 ? 'tr-danger' : ''}">
+      <td>${i+1}</td>
+      <td><div class="fw7">${c.name}</div>${c.phone ? `<div class="text-xs text-muted">${c.phone}</div>` : ''}</td>
+      <td class="fw7 text-mono">${fmt.currency(purchased)}</td>
+      <td class="cv-green fw7 text-mono">${fmt.currency(paid)}</td>
+      <td class="${balance > 0 ? 'cv-red' : 'cv-green'} fw7 text-mono">${fmt.currency(balance)}</td>
+      <td>
+        <div class="td-actions">
+          <button class="btn btn-outline btn-xs" onclick="navigate('company-profile',{id:'${c.id}'})">👁 Profile</button>
+          <button class="btn btn-outline btn-xs" onclick="openCompanyModal('${c.id}')">✏️</button>
+          <button class="btn btn-danger btn-xs" onclick="deleteCompany('${c.id}')">🗑️</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('mainContent').innerHTML = `
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title"><span class="ci">🏭</span> Company / Supplier Management</div>
+      <div class="card-actions">
+        <button class="btn btn-success btn-sm" onclick="openCPayModal()">💰 Pay Company</button>
+        <button class="btn btn-primary btn-sm" onclick="openCompanyModal()">➕ Add Company</button>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <div class="search-wrap"><span class="search-icon">🔍</span><input class="fc" id="comp-search" placeholder="Search companies..." oninput="renderCompanies()"></div>
+    </div>
+    ${filtered.length ? `
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Company</th><th>Total Purchased</th><th>Total Paid</th><th>Remaining Payable</th><th>Actions</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>` : `<div class="empty-state"><div class="empty-icon">🏭</div><p class="empty-msg">No companies. Add your first supplier.</p></div>`}
+  </div>`;
+}
+
+/* =====================================================
+   12. COMPANY PROFILE
+   ===================================================== */
+function renderCompanyProfile(cid) {
+  const comp = getCompanies().find(c => c.id === cid);
+  if (!comp) { navigate('companies'); return; }
+
+  const purchased = compTotalPurchased(cid);
+  const paid      = compTotalPaid(cid);
+  const balance   = purchased - paid;
+  const purchases = getPurchases().filter(p => p.companyId === cid).slice().reverse();
+  const payments  = getCompPays().filter(p => p.companyId === cid).slice().reverse();
+
+  const purchaseRows = purchases.map(p => {
+    const summary = p.items.map(i => `${i.qty}×${PROD_MAP[i.productId]?.name||'?'}`).join(', ');
+    return `<tr>
+      <td class="text-sm">${fmt.dateOnly(p.date)}</td>
+      <td><span class="text-xs text-muted">${billIdDisplay(p.id)}</span></td>
+      <td class="text-sm text-muted">${summary}</td>
+      <td class="fw7 text-mono">${fmt.currency(p.totalAmount)}</td>
+      <td class="text-muted text-sm">${p.note||'—'}</td>
+      <td><div class="td-actions">
+        <button class="btn btn-outline btn-xs" onclick="openPurchaseModal('${p.id}')">✏️</button>
+        <button class="btn btn-danger btn-xs" onclick="deletePurchase('${p.id}')">🗑️</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+
+  const paymentRows = payments.map(p => `<tr>
+    <td class="text-sm">${fmt.dt(p.date)}</td>
+    <td class="cv-green fw7 text-mono">${fmt.currency(p.amount)}</td>
+    <td class="text-muted text-sm">${p.ref||'—'}</td>
+    <td class="text-muted text-sm">${p.note||'—'}</td>
+    <td><div class="td-actions">
+      <button class="btn btn-outline btn-xs" onclick="openCPayModal('${p.id}')">✏️</button>
+      <button class="btn btn-danger btn-xs" onclick="deleteCompanyPayment('${p.id}')">🗑️</button>
+    </div></td>
+  </tr>`).join('');
+
+  document.getElementById('mainContent').innerHTML = `
+  <button class="back-btn" onclick="navigate('companies')">← Back to Companies</button>
+  <div class="profile-hdr">
+    <div class="ph-name">🏭 ${comp.name}</div>
+    <div class="ph-meta">${comp.phone || ''}${comp.phone && comp.address ? ' · ' : ''}${comp.address || ''}</div>
+    <div class="ph-stats">
+      <div class="phs"><div class="phs-v">${fmt.currency(purchased)}</div><div class="phs-l">Total Purchased</div></div>
+      <div class="phs phs-success"><div class="phs-v">${fmt.currency(paid)}</div><div class="phs-l">Total Paid</div></div>
+      <div class="phs ${balance > 0 ? 'phs-danger' : 'phs-success'}"><div class="phs-v">${fmt.currency(balance)}</div><div class="phs-l">Remaining Payable</div></div>
+      <div class="phs"><div class="phs-v">${purchases.length}</div><div class="phs-l">Purchases</div></div>
+    </div>
+  </div>
+  <div style="display:flex;gap:9px;margin-bottom:16px;flex-wrap:wrap">
+    <button class="btn btn-primary btn-sm" onclick="openPurchaseModal('','${cid}')">📋 New Purchase</button>
+    <button class="btn btn-success btn-sm" onclick="openCPayModal('','${cid}')">💰 Pay Company</button>
+  </div>
+  <div class="card">
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="comp-pur">📋 Purchases (${purchases.length})</button>
+      <button class="tab-btn" data-tab="comp-pay">💰 Payments (${payments.length})</button>
+    </div>
+    <div class="tab-panel active" id="comp-pur">
+      ${purchases.length ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Date</th><th>ID</th><th>Products</th><th>Amount</th><th>Note</th><th>Actions</th></tr></thead>
+        <tbody>${purchaseRows}</tbody>
+      </table></div>` : `<div class="empty-state"><div class="empty-icon">📋</div><p class="empty-msg">No purchases yet</p></div>`}
+    </div>
+    <div class="tab-panel" id="comp-pay">
+      ${payments.length ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Date</th><th>Amount</th><th>Ref</th><th>Note</th><th>Actions</th></tr></thead>
+        <tbody>${paymentRows}</tbody>
+      </table></div>` : `<div class="empty-state"><div class="empty-icon">💰</div><p class="empty-msg">No payments recorded</p></div>`}
+    </div>
+  </div>`;
+  initTabs();
+}
+
+/* =====================================================
+   13. CUSTOMERS PAGE
+   ===================================================== */
+function renderCustomers() {
+  const customers = getCustomers();
+  const q         = document.getElementById('cust-search')?.value?.toLowerCase() || '';
+  const filtered  = q ? customers.filter(c => c.name.toLowerCase().includes(q) || (c.phone||'').includes(q)) : customers;
+
+  const rows = filtered.map((c, i) => {
+    const billed  = custTotalBilled(c.id);
+    const paid    = custTotalPaid(c.id);
+    const balance = billed - paid;
+    const isDanger = balance > 0.01;
+
+    // Bottle balances for returnable
+    const bottleBadges = RET_PRODS.map(p => {
+      const bal = custBottleBalance(c.id, p.id);
+      return bal > 0 ? `<span class="badge badge-warning text-xs">${p.name}:${bal}</span>` : '';
+    }).filter(Boolean).join(' ');
+
+    return `<tr class="${isDanger ? 'tr-danger' : ''}">
+      <td>${i+1}</td>
+      <td>
+        <div class="fw7">${c.name}</div>
+        ${c.phone ? `<div class="text-xs text-muted">${c.phone}</div>` : ''}
+      </td>
+      <td class="fw7 text-mono">${fmt.currency(billed)}</td>
+      <td class="cv-green fw7 text-mono">${fmt.currency(paid)}</td>
+      <td class="${isDanger ? 'cv-red' : 'cv-green'} fw7 text-mono">${fmt.currency(balance)}</td>
+      <td>${bottleBadges || '<span class="text-xs text-muted">—</span>'}</td>
+      <td>
+        <div class="td-actions">
+          <button class="btn btn-outline btn-xs" onclick="navigate('customer-profile',{id:'${c.id}'})">👁 Profile</button>
+          <button class="btn btn-outline btn-xs" onclick="openCustomerModal('${c.id}')">✏️</button>
+          <button class="btn btn-danger btn-xs" onclick="deleteCustomer('${c.id}')">🗑️</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('mainContent').innerHTML = `
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title"><span class="ci">👥</span> Customer Management</div>
+      <div class="card-actions">
+        <button class="btn btn-success btn-sm" onclick="openCustPayModal()">💰 Add Payment</button>
+        <button class="btn btn-primary btn-sm" onclick="openCustomerModal()">➕ Add Customer</button>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <div class="search-wrap"><span class="search-icon">🔍</span><input class="fc" id="cust-search" placeholder="Search customers..." oninput="renderCustomers()"></div>
+    </div>
+    ${filtered.length ? `
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Customer</th><th>Total Billed</th><th>Total Paid</th><th>Balance Due</th><th>Bottle Pending</th><th>Actions</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>` : `<div class="empty-state"><div class="empty-icon">👥</div><p class="empty-msg">No customers yet. Add your first customer.</p></div>`}
+  </div>`;
+}
+
+/* =====================================================
+   14. CUSTOMER PROFILE
+   ===================================================== */
+function renderCustomerProfile(cid) {
+  const customer = getCustomers().find(c => c.id === cid);
+  if (!customer) { navigate('customers'); return; }
+
+  const billed  = custTotalBilled(cid);
+  const paid    = custTotalPaid(cid);
+  const balance = billed - paid;
+
+  const bills    = getBills().filter(b => b.customerId === cid).slice().reverse();
+  const payments = getCustPays().filter(p => p.customerId === cid).slice().reverse();
+  const returns  = getMTReturns().filter(r => r.customerId === cid).slice().reverse();
+
+  // Bills tab
+  const billRows = bills.map(b => {
+    const remaining = b.totalAmount - b.paidAmount;
+    const summary   = b.items.map(i => `${i.qty}×${PROD_MAP[i.productId]?.name||'?'}`).join(', ');
+    return `<tr>
+      <td class="text-sm">${fmt.dateOnly(b.date)}</td>
+      <td><span class="text-xs text-muted">${billIdDisplay(b.id)}</span></td>
+      <td class="text-sm text-muted" style="max-width:180px;white-space:normal">${summary}</td>
+      <td class="fw7 text-mono">${fmt.currency(b.totalAmount)}</td>
+      <td class="cv-green fw7 text-mono">${fmt.currency(b.paidAmount)}</td>
+      <td class="${remaining > 0 ? 'cv-red' : 'cv-green'} fw7 text-mono">${fmt.currency(remaining)}</td>
+      <td><span class="badge ${PAY_STATUS[b.paymentStatus]||'badge-neutral'}">${b.paymentStatus}</span></td>
+      <td><div class="td-actions">
+        <button class="btn btn-accent btn-xs" onclick="viewInvoice('${b.id}')">🧾 Invoice</button>
+        <button class="btn btn-outline btn-xs" onclick="openBillModal('${b.id}')">✏️</button>
+        <button class="btn btn-danger btn-xs" onclick="deleteBill('${b.id}')">🗑️</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+
+  // Payment tab
+  const payRows = payments.map(p => `<tr>
+    <td class="text-sm">${fmt.dt(p.date)}</td>
+    <td class="cv-green fw7 text-mono">${fmt.currency(p.amount)}</td>
+    <td><span class="badge badge-neutral">${p.mode||'cash'}</span></td>
+    <td class="text-muted text-sm">${p.note||'—'}</td>
+    <td><div class="td-actions">
+      <button class="btn btn-outline btn-xs" onclick="openCustPayModal('${p.id}')">✏️</button>
+      <button class="btn btn-danger btn-xs" onclick="deleteCustPayment('${p.id}')">🗑️</button>
+    </div></td>
+  </tr>`).join('');
+
+  // MT Returns tab
+  const retRows = returns.map(r => `<tr>
+    <td class="text-sm">${fmt.dt(r.date)}</td>
+    <td class="fw7">${PROD_MAP[r.productId]?.name||'?'}</td>
+    <td class="cv-orange fw7">${r.qty}</td>
+    <td class="text-muted text-sm">${r.note||'—'}</td>
+    <td><div class="td-actions">
+      <button class="btn btn-outline btn-xs" onclick="openMTModal('${r.id}')">✏️</button>
+      <button class="btn btn-danger btn-xs" onclick="deleteMTReturn('${r.id}')">🗑️</button>
+    </div></td>
+  </tr>`).join('');
+
+  // Bottle summary tab
+  const bottleCards = RET_PRODS.map(p => {
+    const given    = bills.reduce((s, b) => s + (b.items.find(i => i.productId === p.id)?.qty || 0), 0);
+    const returned = returns.filter(r => r.productId === p.id).reduce((s, r) => s + r.qty, 0);
+    const bal      = given - returned;
+    return `<div class="bottle-card">
+      <div class="bottle-name">🍶 ${p.name}</div>
+      <div class="b-row"><span class="b-lbl">Total Given</span><span class="b-val cv-blue">${given}</span></div>
+      <div class="b-row"><span class="b-lbl">Total Returned</span><span class="b-val cv-green">${returned}</span></div>
+      <div class="b-row"><span class="b-lbl">Pending Return</span><span class="b-val ${bal > 0 ? 'cv-orange' : 'cv-green'}">${bal}</span></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('mainContent').innerHTML = `
+  <button class="back-btn" onclick="navigate('customers')">← Back to Customers</button>
+  <div class="profile-hdr">
+    <div class="ph-name">👤 ${customer.name}</div>
+    <div class="ph-meta">${customer.phone||''}${customer.phone&&customer.address?' · ':''}${customer.address||''}</div>
+    <div class="ph-stats">
+      <div class="phs"><div class="phs-v">${fmt.currency(billed)}</div><div class="phs-l">Total Billed</div></div>
+      <div class="phs phs-success"><div class="phs-v">${fmt.currency(paid)}</div><div class="phs-l">Total Paid</div></div>
+      <div class="phs ${balance > 0.01 ? 'phs-danger' : 'phs-success'}"><div class="phs-v">${fmt.currency(balance)}</div><div class="phs-l">Balance Due</div></div>
+      <div class="phs"><div class="phs-v">${bills.length}</div><div class="phs-l">Total Bills</div></div>
+      ${customer.deposit > 0 ? `<div class="phs"><div class="phs-v">${fmt.currency(customer.deposit)}</div><div class="phs-l">MT Deposit ${customer.depositTaken==='yes'?'✅':''}</div></div>` : ''}
+    </div>
+  </div>
+  <div style="display:flex;gap:9px;margin-bottom:16px;flex-wrap:wrap">
+    <button class="btn btn-primary btn-sm" onclick="openBillModal('','${cid}')">🧾 New Bill</button>
+    <button class="btn btn-success btn-sm" onclick="openCustPayModal('','${cid}')">💰 Add Payment</button>
+    <button class="btn btn-warning btn-sm" onclick="openMTModal('','${cid}')">↩️ MT Return</button>
+  </div>
+  <div class="card">
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="cust-bills">🧾 Bills (${bills.length})</button>
+      <button class="tab-btn" data-tab="cust-pays">💰 Payments (${payments.length})</button>
+      <button class="tab-btn" data-tab="cust-rets">🍶 MT Returns (${returns.length})</button>
+      <button class="tab-btn" data-tab="cust-bottles">🍶 Bottle Summary</button>
+    </div>
+    <div class="tab-panel active" id="cust-bills">
+      ${bills.length ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Date</th><th>Bill ID</th><th>Products</th><th>Total</th><th>Paid</th><th>Remaining</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>${billRows}</tbody>
+      </table></div>` : `<div class="empty-state"><div class="empty-icon">🧾</div><p class="empty-msg">No bills yet</p></div>`}
+    </div>
+    <div class="tab-panel" id="cust-pays">
+      ${payments.length ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Date</th><th>Amount</th><th>Mode</th><th>Note</th><th>Actions</th></tr></thead>
+        <tbody>${payRows}</tbody>
+      </table></div>` : `<div class="empty-state"><div class="empty-icon">💰</div><p class="empty-msg">No payments recorded</p></div>`}
+    </div>
+    <div class="tab-panel" id="cust-rets">
+      ${returns.length ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Date</th><th>Product</th><th>Qty Returned</th><th>Note</th><th>Actions</th></tr></thead>
+        <tbody>${retRows}</tbody>
+      </table></div>` : `<div class="empty-state"><div class="empty-icon">🍶</div><p class="empty-msg">No MT returns recorded</p></div>`}
+    </div>
+    <div class="tab-panel" id="cust-bottles">
+      <div class="bottle-grid">${bottleCards}</div>
+    </div>
+  </div>`;
+  initTabs();
+}
+
+/* =====================================================
+   15. ALL BILLS PAGE
+   ===================================================== */
+function renderBills() {
+  const bills     = getBills().slice().reverse();
+  const customers = getCustomers();
+  const q         = document.getElementById('bill-search')?.value?.toLowerCase() || '';
+  const statusF   = document.getElementById('bill-status-f')?.value || '';
+
+  let filtered = bills;
+  if (statusF) filtered = filtered.filter(b => b.paymentStatus === statusF);
+  if (q)       filtered = filtered.filter(b => {
+    const c = customers.find(c => c.id === b.customerId);
+    return (c?.name||'').toLowerCase().includes(q) || b.id.includes(q);
+  });
+
+  const rows = filtered.map((b, i) => {
+    const c         = customers.find(c => c.id === b.customerId);
+    const remaining = b.totalAmount - b.paidAmount;
+    const summary   = b.items.map(i => `${i.qty}×${PROD_MAP[i.productId]?.name||'?'}`).join(', ');
+    return `<tr>
+      <td>${i+1}</td>
+      <td class="text-sm">${fmt.dateOnly(b.date)}</td>
+      <td><span class="text-xs text-muted">${billIdDisplay(b.id)}</span></td>
+      <td>
+        <button class="btn btn-ghost btn-xs" onclick="navigate('customer-profile',{id:'${b.customerId}'})">${c?.name||'Unknown'}</button>
+      </td>
+      <td class="text-sm text-muted" style="max-width:160px;white-space:normal">${summary}</td>
+      <td class="fw7 text-mono">${fmt.currency(b.totalAmount)}</td>
+      <td class="${remaining > 0 ? 'cv-red' : 'cv-green'} fw7 text-mono">${fmt.currency(remaining)}</td>
+      <td><span class="badge ${PAY_STATUS[b.paymentStatus]||'badge-neutral'}">${b.paymentStatus}</span></td>
+      <td><div class="td-actions">
+        <button class="btn btn-accent btn-xs" onclick="viewInvoice('${b.id}')">🧾</button>
+        <button class="btn btn-outline btn-xs" onclick="openBillModal('${b.id}')">✏️</button>
+        <button class="btn btn-danger btn-xs" onclick="deleteBill('${b.id}')">🗑️</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('mainContent').innerHTML = `
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title"><span class="ci">🧾</span> All Bills</div>
+      <button class="btn btn-primary btn-sm" onclick="openBillModal()">➕ New Bill</button>
+    </div>
+    <div class="filter-bar">
+      <div class="search-wrap"><span class="search-icon">🔍</span><input class="fc" id="bill-search" placeholder="Search by customer or bill ID..." oninput="renderBills()"></div>
+      <select class="fc" style="width:140px" id="bill-status-f" onchange="renderBills()">
+        <option value="">All Status</option>
+        <option value="paid">Paid</option>
+        <option value="partial">Partial</option>
+        <option value="unpaid">Unpaid</option>
+      </select>
+    </div>
+    ${filtered.length ? `<div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Date</th><th>Bill ID</th><th>Customer</th><th>Products</th><th>Total</th><th>Remaining</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>` : `<div class="empty-state"><div class="empty-icon">🧾</div><p class="empty-msg">No bills found</p></div>`}
+  </div>`;
+}
+
+/* =====================================================
+   16. STOCK MANAGER
+   ===================================================== */
+function renderStock() {
+  const stock  = getStock();
+  const bills  = getBills();
+  const purs   = getPurchases();
+
+  const cards = PRODUCTS.map(p => {
+    const s         = stock[p.id] || {};
+    const totalSold = bills.reduce((sum, b) => sum + (b.items.find(i => i.productId === p.id)?.qty || 0), 0);
+    const totalPur  = purs.reduce((sum, pur) => sum + (pur.items.find(i => i.productId === p.id)?.qty || 0), 0);
+
+    return `<div class="bottle-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <div class="bottle-name">📦 ${p.name}</div>
+        <div style="display:flex;gap:6px">
+          <span class="badge ${p.returnable ? 'badge-info' : 'badge-teal'}">${p.returnable ? 'Returnable' : 'Non-Returnable'}</span>
+          <button class="btn btn-outline btn-xs" onclick="openStockAdjModal('${p.id}')">Adj</button>
+        </div>
+      </div>
+      <div class="b-row"><span class="b-lbl">Filled Stock</span><span class="b-val cv-green">${s.filled||0}</span></div>
+      ${p.returnable ? `
+      <div class="b-row"><span class="b-lbl">MT (Empty) Stock</span><span class="b-val cv-orange">${s.mt||0}</span></div>
+      <div class="b-row"><span class="b-lbl">Market (Customers)</span><span class="b-val cv-accent">${s.market||0}</span></div>
+      <div class="b-row" style="border-top:2px solid var(--border-lt);margin-top:6px"><span class="b-lbl fw7">Total Circulation</span><span class="b-val fw7">${(s.filled||0)+(s.mt||0)+(s.market||0)}</span></div>
+      ` : ''}
+      <div class="b-row"><span class="b-lbl">Total Sold</span><span class="b-val">${totalSold}</span></div>
+      <div class="b-row"><span class="b-lbl">Total Purchased</span><span class="b-val">${totalPur}</span></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('mainContent').innerHTML = `
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title"><span class="ci">📦</span> Stock Manager</div>
+      <button class="btn btn-primary btn-sm" onclick="openStockAdjModal()">➕ Adjust Stock</button>
+    </div>
+    <div class="info-box">Stock updates automatically with purchases, sales, and returns. Use manual adjustment for initial setup or corrections only.</div>
+    <div class="bottle-grid">${cards}</div>
+  </div>`;
+}
+
+/* =====================================================
+   17. MT MANAGER
+   ===================================================== */
+function renderMTManager() {
+  const customers = getCustomers();
+  const returns   = getMTReturns().slice().reverse();
+  const q         = document.getElementById('mt-search')?.value?.toLowerCase() || '';
+
+  // Customer-wise breakdown
+  const custMTRows = customers.map(c => {
+    const balances = RET_PRODS.map(p => {
+      const bal = custBottleBalance(c.id, p.id);
+      return { name: p.name, id: p.id, bal };
+    }).filter(b => b.bal !== 0);
+
+    if (!balances.length && !q) return '';
+    if (q && !c.name.toLowerCase().includes(q)) return '';
+
+    const totalPending = balances.reduce((s, b) => s + Math.max(0, b.bal), 0);
+    const depositInfo  = c.deposit > 0 ? `<span class="badge ${c.depositTaken==='yes'?'badge-success':'badge-warning'} text-xs">Deposit: ${fmt.currency(c.deposit)} ${c.depositTaken==='yes'?'✅':'⏳'}</span>` : '';
+
+    return `<tr class="${totalPending > 5 ? 'tr-warn' : ''}">
+      <td><button class="btn btn-ghost btn-xs" onclick="navigate('customer-profile',{id:'${c.id}'})">${c.name}</button></td>
+      ${RET_PRODS.map(p => {
+        const bal = custBottleBalance(c.id, p.id);
+        return `<td class="${bal > 0 ? 'cv-orange fw7' : bal < 0 ? 'cv-red fw7' : 'text-muted'}">${bal}</td>`;
+      }).join('')}
+      <td>${depositInfo || '<span class="text-xs text-muted">—</span>'}</td>
+      <td><button class="btn btn-success btn-xs" onclick="openMTModal('','${c.id}')">↩️ Return</button></td>
+    </tr>`;
+  }).filter(Boolean).join('');
+
+  // Return history
+  const filteredRets = q ? returns.filter(r => {
+    const c = customers.find(c => c.id === r.customerId);
+    return (c?.name||'').toLowerCase().includes(q);
+  }) : returns;
+
+  const retHistRows = filteredRets.map((r, i) => {
+    const c = customers.find(c => c.id === r.customerId);
+    return `<tr>
+      <td>${i+1}</td>
+      <td class="text-sm">${fmt.dt(r.date)}</td>
+      <td class="fw7">${c?.name||'Unknown'}</td>
+      <td class="fw7">${PROD_MAP[r.productId]?.name||'?'}</td>
+      <td class="cv-orange fw7">${r.qty}</td>
+      <td class="text-muted text-sm">${r.note||'—'}</td>
+      <td><div class="td-actions">
+        <button class="btn btn-outline btn-xs" onclick="openMTModal('${r.id}')">✏️</button>
+        <button class="btn btn-danger btn-xs" onclick="deleteMTReturn('${r.id}')">🗑️</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('mainContent').innerHTML = `
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title"><span class="ci">🍶</span> MT (Empty Bottle) Manager</div>
+      <button class="btn btn-primary btn-sm" onclick="openMTModal()">➕ Record MT Return</button>
+    </div>
+    <div class="filter-bar">
+      <div class="search-wrap"><span class="search-icon">🔍</span><input class="fc" id="mt-search" placeholder="Search customers..." oninput="renderMTManager()"></div>
+    </div>
+
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="mt-balance">📊 Customer Balances</button>
+      <button class="tab-btn" data-tab="mt-history">📋 Return History (${returns.length})</button>
+    </div>
+
+    <div class="tab-panel active" id="mt-balance">
+      ${customers.length ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Customer</th>${RET_PRODS.map(p=>`<th>${p.name} Balance</th>`).join('')}<th>MT Deposit</th><th>Action</th></tr></thead>
+        <tbody>${custMTRows || '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t2)">All customers have zero balance</td></tr>'}</tbody>
+      </table></div>` : `<div class="empty-state"><div class="empty-icon">🍶</div><p class="empty-msg">No customers yet</p></div>`}
+    </div>
+
+    <div class="tab-panel" id="mt-history">
+      ${filteredRets.length ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>#</th><th>Date</th><th>Customer</th><th>Product</th><th>Qty Returned</th><th>Note</th><th>Actions</th></tr></thead>
+        <tbody>${retHistRows}</tbody>
+      </table></div>` : `<div class="empty-state"><div class="empty-icon">📋</div><p class="empty-msg">No MT returns recorded</p></div>`}
+    </div>
+  </div>`;
+  initTabs();
+}
+
+/* =====================================================
+   18. PROFIT & REVENUE
+   ===================================================== */
+function renderProfit() {
+  const prices   = getPrices();
+  const bills    = getBills();
+  const customers= getCustomers();
+  const { totalRevenue, totalCost, totalProfit } = calcGlobalProfit();
+
+  // Per-product profit breakdown
+  const prodStats = PRODUCTS.map(p => {
+    let qtySold = 0, revenue = 0, cost = 0;
+    bills.forEach(b => {
+      const item = b.items.find(i => i.productId === p.id);
+      if (item) {
+        qtySold += item.qty;
+        revenue += (item.sellingPrice || 0) * item.qty;
+        cost    += (prices[p.id]?.purchasePrice || 0) * item.qty;
+      }
+    });
+    const profit = revenue - cost;
+    return { p, qtySold, revenue, cost, profit };
+  }).filter(s => s.qtySold > 0);
+
+  const prodRows = prodStats.map(s => `<tr>
+    <td class="fw7">${s.p.name}</td>
+    <td class="text-mono">${s.qtySold}</td>
+    <td class="text-mono fw7">${fmt.currency(s.revenue)}</td>
+    <td class="text-mono">${fmt.currency(s.cost)}</td>
+    <td class="${s.profit >= 0 ? 'cv-green' : 'cv-red'} fw7 text-mono">${fmt.currency(s.profit)}</td>
+    <td class="text-sm text-muted">${s.qtySold > 0 ? fmt.currency(s.profit / s.qtySold) + '/unit' : '—'}</td>
+  </tr>`).join('');
+
+  // Customer-wise receivables
+  const custRows = customers.map(c => {
+    const billed  = custTotalBilled(c.id);
+    const paid    = custTotalPaid(c.id);
+    const balance = billed - paid;
+    if (billed === 0) return '';
+    return `<tr class="${balance > 0 ? 'tr-danger' : ''}">
+      <td><button class="btn btn-ghost btn-xs" onclick="navigate('customer-profile',{id:'${c.id}'})">${c.name}</button></td>
+      <td class="fw7 text-mono">${fmt.currency(billed)}</td>
+      <td class="cv-green fw7 text-mono">${fmt.currency(paid)}</td>
+      <td class="${balance > 0 ? 'cv-red' : 'cv-green'} fw7 text-mono">${fmt.currency(balance)}</td>
+    </tr>`;
+  }).filter(Boolean).join('');
+
+  document.getElementById('mainContent').innerHTML = `
+  <div class="stats-grid" style="margin-bottom:20px">
+    <div class="stat-card sc-green">
+      <span class="stat-icon">💰</span>
+      <div class="stat-val cv-green">${fmt.currency(totalRevenue)}</div>
+      <div class="stat-lbl">Total Revenue</div>
+    </div>
+    <div class="stat-card sc-red">
+      <span class="stat-icon">🏭</span>
+      <div class="stat-val cv-red">${fmt.currency(totalCost)}</div>
+      <div class="stat-lbl">Total Cost</div>
+    </div>
+    <div class="stat-card sc-teal">
+      <span class="stat-icon">💹</span>
+      <div class="stat-val" style="color:var(--teal)">${fmt.currency(totalProfit)}</div>
+      <div class="stat-lbl">Total Profit</div>
+    </div>
+    <div class="stat-card sc-purple">
+      <span class="stat-icon">📊</span>
+      <div class="stat-val cv-purple">${totalRevenue > 0 ? ((totalProfit/totalRevenue)*100).toFixed(1)+'%' : '0%'}</div>
+      <div class="stat-lbl">Profit Margin</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-hdr"><div class="card-title"><span class="ci">📦</span> Product-wise Profit</div></div>
+      ${prodStats.length ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Product</th><th>Qty Sold</th><th>Revenue</th><th>Cost</th><th>Profit</th><th>Per Unit</th></tr></thead>
+        <tbody>${prodRows}</tbody>
+      </table></div>` : `<div class="empty-state"><div class="empty-icon">📦</div><p class="empty-msg">No sales data yet</p></div>`}
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-title"><span class="ci">👥</span> Customer Receivables</div></div>
+      ${custRows ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Customer</th><th>Billed</th><th>Paid</th><th>Balance</th></tr></thead>
+        <tbody>${custRows}</tbody>
+      </table></div>` : `<div class="empty-state"><div class="empty-icon">👥</div><p class="empty-msg">No data</p></div>`}
+    </div>
+  </div>`;
+}
+
+/* =====================================================
+   19. PRICE SETTINGS
+   ===================================================== */
+function renderPrices() {
+  const prices = getPrices();
+  const cards = PRODUCTS.map(p => {
+    const pr = prices[p.id] || {};
+    const profit = (pr.sellingPrice || 0) - (pr.purchasePrice || 0);
+    return `<div class="price-card">
+      <div class="price-card-name">${PROD_MAP[p.id] ? '📦' : '🍶'} ${p.name}
+        <span class="badge ${p.returnable ? 'badge-info' : 'badge-teal'} text-xs" style="margin-left:6px">${p.returnable ? 'Returnable' : 'Non-Ret.'}</span>
+      </div>
+      <div class="price-grid">
+        <div class="price-field">
+          <label>Purchase Price (₹)</label>
+          <input type="number" class="fc" id="pp_${p.id}" value="${pr.purchasePrice||0}" min="0" step="0.01" placeholder="0">
+        </div>
+        <div class="price-field">
+          <label>Selling Price (₹)</label>
+          <input type="number" class="fc" id="sp_${p.id}" value="${pr.sellingPrice||0}" min="0" step="0.01" placeholder="0">
+        </div>
+        <div class="price-field">
+          <label>Profit/Unit</label>
+          <div style="padding:8px 12px;background:${profit >= 0 ? 'var(--success-lt)' : 'var(--danger-lt)'};border-radius:var(--r);font-weight:700;font-size:13px;color:${profit >= 0 ? 'var(--success)' : 'var(--danger)'}" id="profit_${p.id}">
+            ${fmt.currency(profit)}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('mainContent').innerHTML = `
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title"><span class="ci">🏷️</span> Price Settings</div>
+      <button class="btn btn-primary btn-sm" onclick="savePrices()">💾 Save All Prices</button>
+    </div>
+    <div class="info-box">Set purchase and selling prices per product. These are used for profit calculations only. Selling prices shown here are defaults — you can override per-bill.</div>
+    <div class="bottle-grid">${cards}</div>
+  </div>`;
+
+  // Live profit update
+  PRODUCTS.forEach(p => {
+    const ppEl = document.getElementById(`pp_${p.id}`);
+    const spEl = document.getElementById(`sp_${p.id}`);
+    const prEl = document.getElementById(`profit_${p.id}`);
+    const update = () => {
+      const profit = (+spEl.value || 0) - (+ppEl.value || 0);
+      prEl.textContent = fmt.currency(profit);
+      prEl.style.background = profit >= 0 ? 'var(--success-lt)' : 'var(--danger-lt)';
+      prEl.style.color = profit >= 0 ? 'var(--success)' : 'var(--danger)';
+    };
+    ppEl.oninput = update; spEl.oninput = update;
+  });
+}
+
+function savePrices() {
+  const prices = getPrices();
+  PRODUCTS.forEach(p => {
+    const pp = +document.getElementById(`pp_${p.id}`)?.value || 0;
+    const sp = +document.getElementById(`sp_${p.id}`)?.value || 0;
+    prices[p.id] = { purchasePrice: pp, sellingPrice: sp };
+  });
+  setPrices(prices);
+  toast('Prices saved successfully', 'success');
+}
+
+/* =====================================================
+   20. SETTINGS
+   ===================================================== */
+function renderSettings() {
+  const s = getSettings();
+  document.getElementById('mainContent').innerHTML = `
+  <div class="card">
+    <div class="card-hdr"><div class="card-title"><span class="ci">⚙️</span> System Settings</div></div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Company Name</label>
+        <input class="fc" id="set_company" value="${s.companyName||''}" placeholder="Company name for invoices">
+      </div>
+      <div class="fg">
+        <label class="fl">GST Number</label>
+        <input class="fc" id="set_gst" value="${s.gst||''}" placeholder="GST registration number">
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Phone</label>
+        <input class="fc" id="set_phone" value="${s.phone||''}" placeholder="Business phone number">
+      </div>
+      <div class="fg">
+        <label class="fl">Email</label>
+        <input class="fc" id="set_email" value="${s.email||''}" placeholder="Business email">
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Address</label>
+      <textarea class="fc" id="set_address" placeholder="Business address for invoices">${s.address||''}</textarea>
+    </div>
+    <div class="fg">
+      <label class="fl">Invoice Footer Note</label>
+      <input class="fc" id="set_footer" value="${s.footer||'Thank you for your business!'}" placeholder="Footer message on invoices">
+    </div>
+    <div class="modal-ftr" style="margin-top:0;border:none;padding:0">
+      <button class="btn btn-primary" onclick="saveSettings()">💾 Save Settings</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-title"><span class="ci">🗃️</span> Data Management</div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-outline" onclick="exportData()">📤 Export All Data (JSON)</button>
+      <button class="btn btn-warning" onclick="importDataPrompt()">📥 Import Data</button>
+      <button class="btn btn-danger" onclick="doResetAll()">⚠️ Reset All Data</button>
+    </div>
+    <div class="fh" style="margin-top:10px">Export creates a JSON backup of all data. Import replaces all current data.</div>
+    <div class="fg" style="margin-top:16px">
+      <label class="fl">Import JSON Data</label>
+      <textarea class="fc" id="import_json" placeholder="Paste exported JSON data here..." style="min-height:100px"></textarea>
+    </div>
+    <button class="btn btn-warning" onclick="importData()" style="margin-top:8px">📥 Import from above JSON</button>
+  </div>`;
+}
+
+function saveSettings() {
+  setSettings({
+    companyName: document.getElementById('set_company').value,
+    gst:         document.getElementById('set_gst').value,
+    phone:       document.getElementById('set_phone').value,
+    email:       document.getElementById('set_email').value,
+    address:     document.getElementById('set_address').value,
+    footer:      document.getElementById('set_footer').value,
+  });
+  toast('Settings saved', 'success');
+}
+
+function exportData() {
+  const data = {
+    svm_stock: getStock(), svm_prices: getPrices(),
+    svm_companies: getCompanies(), svm_purchases: getPurchases(), svm_cpays: getCompPays(),
+    svm_customers: getCustomers(), svm_bills: getBills(), svm_custpays: getCustPays(),
+    svm_mt: getMTReturns(), svm_settings: getSettings(),
+    exportedAt: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `svm-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); toast('Data exported successfully', 'success');
+}
+
+function importData() {
+  try {
+    const json = document.getElementById('import_json').value;
+    if (!json) { toast('Paste JSON data first', 'warning'); return; }
+    const data = JSON.parse(json);
+    const keys = ['svm_stock','svm_prices','svm_companies','svm_purchases','svm_cpays','svm_customers','svm_bills','svm_custpays','svm_mt','svm_settings'];
+    keys.forEach(k => { if (data[k] !== undefined) LS.set(k, data[k]); });
+    toast('Data imported successfully. Refreshing...', 'success');
+    setTimeout(() => navigate('dashboard'), 1000);
+  } catch(e) {
+    toast('Invalid JSON data. Please check and retry.', 'error');
+  }
+}
+
+function importDataPrompt() {
+  document.getElementById('import_json').scrollIntoView({ behavior: 'smooth' });
+  toast('Paste your exported JSON data in the text area below', 'info');
+}
+
+/* =====================================================
+   21. COMPANY MODAL — SAVE / DELETE
+   ===================================================== */
+function openCompanyModal(id = '') {
+  const el = document.getElementById('companyModal');
+  document.getElementById('cm_id').value = id;
+  document.getElementById('cm_name_e').textContent = '';
+  document.getElementById('companyModalTitle').textContent = id ? '✏️ Edit Company' : '🏭 Add Company';
+  if (id) {
+    const c = getCompanies().find(c => c.id === id);
+    if (!c) return;
+    ['name','phone','address','notes'].forEach(k => document.getElementById(`cm_${k}`).value = c[k]||'');
+  } else {
+    ['name','phone','address','notes'].forEach(k => document.getElementById(`cm_${k}`).value = '');
+  }
+  openModal('companyModal');
+}
+
+function saveCompany() {
+  const id      = document.getElementById('cm_id').value;
+  const name    = document.getElementById('cm_name').value.trim();
+  const phone   = document.getElementById('cm_phone').value.trim();
+  const address = document.getElementById('cm_address').value.trim();
+  const notes   = document.getElementById('cm_notes').value.trim();
+  if (!name) { document.getElementById('cm_name_e').textContent = 'Name is required'; return; }
+  const comps = getCompanies();
+  if (id) {
+    const idx = comps.findIndex(c => c.id === id);
+    if (idx > -1) Object.assign(comps[idx], { name, phone, address, notes });
+  } else {
+    comps.push({ id: genId(), name, phone, address, notes, createdAt: new Date().toISOString() });
+  }
+  setCompanies(comps);
+  closeModal('companyModal');
+  toast(id ? 'Company updated' : 'Company added', 'success');
+  renderPage(currentPage, viewState);
+}
+
+async function deleteCompany(id) {
+  const c   = getCompanies().find(c => c.id === id);
+  const ok  = await confirm2('Delete Company', `Delete <strong>${c?.name}</strong>? Purchase and payment history will remain.`, 'Delete', 'btn-danger');
+  if (!ok) return;
+  setCompanies(getCompanies().filter(c => c.id !== id));
+  toast('Company deleted', 'success');
+  renderPage(currentPage, viewState);
+}
+
+/* =====================================================
+   22. PURCHASE MODAL
+   ===================================================== */
+let purRows = [];
+
+function openPurchaseModal(id = '', preCompId = '') {
+  purRows = [];
+  document.getElementById('pur_id').value = id;
+  document.getElementById('pur_err').textContent = '';
+  document.getElementById('pur_company_e').textContent = '';
+  document.getElementById('purchaseModalTitle').textContent = id ? '✏️ Edit Purchase' : '📋 New Purchase';
+
+  const comps = getCompanies();
+  document.getElementById('pur_company').innerHTML = '<option value="">Select company...</option>' +
+    comps.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+
+  if (id) {
+    const p = getPurchases().find(p => p.id === id);
+    if (!p) return;
+    document.getElementById('pur_company').value = p.companyId;
+    document.getElementById('pur_date').value    = fmt.inputDT(p.date);
+    document.getElementById('pur_note').value    = p.note || '';
+    purRows = p.items.map(i => ({ productId: i.productId, qty: i.qty, price: i.price }));
+  } else {
+    if (preCompId) document.getElementById('pur_company').value = preCompId;
+    document.getElementById('pur_date').value = nowDT();
+    document.getElementById('pur_note').value = '';
+    purRows = [{ productId: '', qty: '', price: '' }];
+  }
+  renderPurRows();
+  openModal('purchaseModal');
+}
+
+function addPurRow()  { purRows.push({ productId:'', qty:'', price:'' }); renderPurRows(); }
+function removePurRow(i) {
+  if (purRows.length === 1) { toast('At least one row required', 'warning'); return; }
+  purRows.splice(i, 1); renderPurRows();
+}
+function renderPurRows() {
+  document.getElementById('purRows').innerHTML = purRows.map((r, i) => `
+    <div class="item-row">
+      <select class="fc" onchange="purRowChange(${i},'productId',this.value)">
+        <option value="">Select product...</option>
+        ${PRODUCTS.map(p => `<option value="${p.id}" ${p.id===r.productId?'selected':''}>${p.name}</option>`).join('')}
+      </select>
+      <input type="number" class="fc" placeholder="Qty" min="1" value="${r.qty}"
+        oninput="purRowChange(${i},'qty',this.value)">
+      <input type="number" class="fc" placeholder="Cost" min="0" step="0.01" value="${r.price}"
+        oninput="purRowChange(${i},'price',this.value)">
+      <div class="item-total">${r.qty && r.price ? fmt.currency(+r.qty * +r.price) : '₹0.00'}</div>
+      <button class="del-row-btn" onclick="removePurRow(${i})">×</button>
+    </div>`).join('');
+  updatePurTotal();
+}
+function purRowChange(i, field, val) {
+  purRows[i][field] = val;
+  const rows = document.querySelectorAll('#purRows .item-row');
+  if (rows[i]) {
+    const tot = rows[i].querySelector('.item-total');
+    const q = +purRows[i].qty, p = +purRows[i].price;
+    if (tot) tot.textContent = q && p ? fmt.currency(q * p) : '₹0.00';
+  }
+  updatePurTotal();
+}
+function updatePurTotal() {
+  const total = purRows.reduce((s, r) => s + (+r.qty||0) * (+r.price||0), 0);
+  document.getElementById('purTotal').textContent = fmt.currency(total);
+}
+
+function savePurchase() {
+  const id        = document.getElementById('pur_id').value;
+  const companyId = document.getElementById('pur_company').value;
+  const date      = document.getElementById('pur_date').value;
+  const note      = document.getElementById('pur_note').value.trim();
+  const errEl     = document.getElementById('pur_err');
+  errEl.textContent = '';
+  if (!companyId) { document.getElementById('pur_company_e').textContent = 'Select a company'; return; }
+  if (!date)      { errEl.textContent = 'Date is required'; return; }
+  const validRows = purRows.filter(r => r.productId && +r.qty > 0);
+  if (!validRows.length) { errEl.textContent = 'Add at least one product with qty > 0'; return; }
+  const totalAmount = validRows.reduce((s, r) => s + (+r.qty) * (+r.price||0), 0);
+  const purs = getPurchases();
+  if (id) {
+    const old = purs.find(p => p.id === id);
+    if (old) old.items.forEach(item => stockMod(item.productId, 'filled', -item.qty)); // reverse
+    const idx = purs.findIndex(p => p.id === id);
+    purs[idx] = { ...purs[idx], companyId, date: new Date(date).toISOString(),
+      items: validRows.map(r => ({ productId: r.productId, qty: +r.qty, price: +r.price||0 })),
+      totalAmount, note };
+  } else {
+    purs.push({ id: genId(), companyId, date: new Date(date).toISOString(),
+      items: validRows.map(r => ({ productId: r.productId, qty: +r.qty, price: +r.price||0 })),
+      totalAmount, note, createdAt: new Date().toISOString() });
+  }
+  // Apply new stock
+  validRows.forEach(r => stockMod(r.productId, 'filled', +r.qty));
+  setPurchases(purs);
+  closeModal('purchaseModal');
+  toast(id ? 'Purchase updated' : 'Purchase recorded and stock updated', 'success');
+  renderPage(currentPage, viewState);
+}
+
+async function deletePurchase(id) {
+  const ok = await confirm2('Delete Purchase', 'Stock will be reduced. This cannot be undone.', 'Delete', 'btn-danger');
+  if (!ok) return;
+  const p = getPurchases().find(p => p.id === id);
+  if (p) { p.items.forEach(item => stockMod(item.productId, 'filled', -item.qty)); }
+  setPurchases(getPurchases().filter(p => p.id !== id));
+  toast('Purchase deleted, stock reduced', 'success');
+  renderPage(currentPage, viewState);
+}
+
+/* =====================================================
+   23. COMPANY PAYMENT MODAL
+   ===================================================== */
+function openCPayModal(id = '', preCompId = '') {
+  document.getElementById('cpay_id').value = id;
+  document.getElementById('cpay_company_e').textContent = '';
+  document.getElementById('cpay_amount_e').textContent  = '';
+  document.getElementById('cpayModalTitle').textContent = id ? '✏️ Edit Payment' : '💰 Pay to Company';
+  const comps = getCompanies();
+  document.getElementById('cpay_company').innerHTML = '<option value="">Select company...</option>' +
+    comps.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  if (id) {
+    const p = getCompPays().find(p => p.id === id);
+    if (!p) return;
+    document.getElementById('cpay_company').value = p.companyId;
+    document.getElementById('cpay_amount').value  = p.amount;
+    document.getElementById('cpay_date').value    = fmt.inputDT(p.date);
+    document.getElementById('cpay_ref').value     = p.ref   || '';
+    document.getElementById('cpay_note').value    = p.note  || '';
+  } else {
+    if (preCompId) document.getElementById('cpay_company').value = preCompId;
+    document.getElementById('cpay_amount').value = '';
+    document.getElementById('cpay_date').value   = nowDT();
+    document.getElementById('cpay_ref').value    = '';
+    document.getElementById('cpay_note').value   = '';
+  }
+  openModal('cpayModal');
+}
+
+function saveCompanyPayment() {
+  const id        = document.getElementById('cpay_id').value;
+  const companyId = document.getElementById('cpay_company').value;
+  const amount    = +document.getElementById('cpay_amount').value;
+  const date      = document.getElementById('cpay_date').value;
+  const ref       = document.getElementById('cpay_ref').value.trim();
+  const note      = document.getElementById('cpay_note').value.trim();
+  if (!companyId) { document.getElementById('cpay_company_e').textContent = 'Select a company'; return; }
+  if (!amount || amount <= 0) { document.getElementById('cpay_amount_e').textContent = 'Enter valid amount'; return; }
+  const pays = getCompPays();
+  if (id) {
+    const idx = pays.findIndex(p => p.id === id);
+    if (idx > -1) Object.assign(pays[idx], { companyId, amount, date: new Date(date).toISOString(), ref, note });
+  } else {
+    pays.push({ id: genId(), companyId, amount, date: new Date(date).toISOString(), ref, note, createdAt: new Date().toISOString() });
+  }
+  setCompPays(pays);
+  closeModal('cpayModal');
+  toast(id ? 'Payment updated' : 'Payment to company recorded', 'success');
+  renderPage(currentPage, viewState);
+}
+
+async function deleteCompanyPayment(id) {
+  const ok = await confirm2('Delete Payment', 'This will affect company balance.', 'Delete', 'btn-danger');
+  if (!ok) return;
+  setCompPays(getCompPays().filter(p => p.id !== id));
+  toast('Payment deleted', 'success');
+  renderPage(currentPage, viewState);
+}
+
+/* =====================================================
+   24. CUSTOMER MODAL — SAVE / DELETE
+   ===================================================== */
+function openCustomerModal(id = '') {
+  document.getElementById('cu_id').value = id;
+  document.getElementById('cu_name_e').textContent = '';
+  document.getElementById('customerModalTitle').textContent = id ? '✏️ Edit Customer' : '👤 Add Customer';
+  if (id) {
+    const c = getCustomers().find(c => c.id === id);
+    if (!c) return;
+    document.getElementById('cu_name').value         = c.name    || '';
+    document.getElementById('cu_phone').value        = c.phone   || '';
+    document.getElementById('cu_address').value      = c.address || '';
+    document.getElementById('cu_deposit').value      = c.deposit || '';
+    document.getElementById('cu_deposit_taken').value= c.depositTaken || 'no';
+    document.getElementById('cu_notes').value        = c.notes   || '';
+  } else {
+    ['name','phone','address','deposit','notes'].forEach(k => document.getElementById(`cu_${k}`).value = '');
+    document.getElementById('cu_deposit_taken').value = 'no';
+  }
+  openModal('customerModal');
+}
+
+function saveCustomer() {
+  const id           = document.getElementById('cu_id').value;
+  const name         = document.getElementById('cu_name').value.trim();
+  const phone        = document.getElementById('cu_phone').value.trim();
+  const address      = document.getElementById('cu_address').value.trim();
+  const deposit      = +document.getElementById('cu_deposit').value || 0;
+  const depositTaken = document.getElementById('cu_deposit_taken').value;
+  const notes        = document.getElementById('cu_notes').value.trim();
+  if (!name) { document.getElementById('cu_name_e').textContent = 'Name is required'; return; }
+  const custs = getCustomers();
+  if (id) {
+    const idx = custs.findIndex(c => c.id === id);
+    if (idx > -1) Object.assign(custs[idx], { name, phone, address, deposit, depositTaken, notes });
+  } else {
+    custs.push({ id: genId(), name, phone, address, deposit, depositTaken, notes, createdAt: new Date().toISOString() });
+  }
+  setCustomers(custs);
+  closeModal('customerModal');
+  toast(id ? 'Customer updated' : 'Customer added', 'success');
+  renderPage(currentPage, viewState);
+}
+
+async function deleteCustomer(id) {
+  const c   = getCustomers().find(c => c.id === id);
+  const ok  = await confirm2('Delete Customer', `Delete <strong>${c?.name}</strong>? Bills and payments will remain.`, 'Delete', 'btn-danger');
+  if (!ok) return;
+  setCustomers(getCustomers().filter(c => c.id !== id));
+  toast('Customer deleted', 'success');
+  renderPage(currentPage, viewState);
+}
+
+/* =====================================================
+   25. BILL MODAL — SAVE / DELETE
+   ===================================================== */
+let billItemRows = [];
+
+function openBillModal(id = '', preCustId = '') {
+  billItemRows = [];
+  document.getElementById('bl_id').value = id;
+  document.getElementById('bl_err').textContent = '';
+  document.getElementById('bl_customer_e').textContent = '';
+  document.getElementById('billModalTitle').textContent = id ? '✏️ Edit Bill' : '🧾 New Bill';
+  const custs = getCustomers();
+  document.getElementById('bl_customer').innerHTML = '<option value="">Select customer...</option>' +
+    custs.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  const prices = getPrices();
+  if (id) {
+    const b = getBills().find(b => b.id === id);
+    if (!b) return;
+    document.getElementById('bl_customer').value = b.customerId;
+    document.getElementById('bl_date').value     = fmt.inputDT(b.date);
+    document.getElementById('bl_paid').value     = b.paidAmount;
+    document.getElementById('bl_status').value   = b.paymentStatus;
+    document.getElementById('bl_note').value     = b.note || '';
+    billItemRows = b.items.map(i => ({ productId: i.productId, qty: i.qty, sellingPrice: i.sellingPrice }));
+  } else {
+    if (preCustId) document.getElementById('bl_customer').value = preCustId;
+    document.getElementById('bl_date').value   = nowDT();
+    document.getElementById('bl_paid').value   = '';
+    document.getElementById('bl_status').value = 'unpaid';
+    document.getElementById('bl_note').value   = '';
+    billItemRows = [{ productId: '', qty: '', sellingPrice: '' }];
+  }
+  renderBillRows();
+  openModal('billModal');
+}
+
+function addBillRow() { billItemRows.push({ productId:'', qty:'', sellingPrice:'' }); renderBillRows(); }
+function removeBillRow(i) {
+  if (billItemRows.length === 1) { toast('At least one row required', 'warning'); return; }
+  billItemRows.splice(i, 1); renderBillRows();
+}
+
+function renderBillRows() {
+  const prices = getPrices();
+  document.getElementById('billRows').innerHTML = billItemRows.map((r, i) => `
+    <div class="item-row">
+      <select class="fc" onchange="billRowChange(${i},'productId',this.value)">
+        <option value="">Select product...</option>
+        ${PRODUCTS.map(p => `<option value="${p.id}" ${p.id===r.productId?'selected':''}>${p.name}</option>`).join('')}
+      </select>
+      <input type="number" class="fc" placeholder="Qty" min="1" value="${r.qty}"
+        oninput="billRowChange(${i},'qty',this.value)">
+      <input type="number" class="fc" placeholder="Price" min="0" step="0.01" value="${r.sellingPrice}"
+        id="blsp_${i}" oninput="billRowChange(${i},'sellingPrice',this.value)">
+      <div class="item-total" id="blrow_total_${i}">${r.qty && r.sellingPrice ? fmt.currency(+r.qty * +r.sellingPrice) : '₹0.00'}</div>
+      <button class="del-row-btn" onclick="removeBillRow(${i})">×</button>
+    </div>`).join('');
+  updateBillSummary();
+}
+
+function billRowChange(i, field, val) {
+  // If productId changes, auto-fill selling price from settings
+  if (field === 'productId') {
+    const prices = getPrices();
+    const sp = prices[val]?.sellingPrice || 0;
+    billItemRows[i].productId    = val;
+    billItemRows[i].sellingPrice = sp;
+    const spEl = document.getElementById(`blsp_${i}`);
+    if (spEl && !billItemRows[i].sellingPrice_overridden) spEl.value = sp || '';
+  } else {
+    billItemRows[i][field] = val;
+  }
+  const rows = document.querySelectorAll('#billRows .item-row');
+  if (rows[i]) {
+    const tot = rows[i].querySelector('.item-total');
+    const q = +billItemRows[i].qty, p = +billItemRows[i].sellingPrice;
+    if (tot) tot.textContent = q && p ? fmt.currency(q * p) : '₹0.00';
+  }
+  updateBillSummary();
+}
+
+function calcBillTotal() {
+  return billItemRows.reduce((s, r) => s + (+r.qty||0) * (+r.sellingPrice||0), 0);
+}
+
+function updateBillSummary() {
+  const total   = calcBillTotal();
+  const paid    = +document.getElementById('bl_paid').value || 0;
+  const balance = Math.max(0, total - paid);
+  document.getElementById('billGrandTotal').textContent  = fmt.currency(total);
+  document.getElementById('billBalanceDue').textContent  = fmt.currency(balance);
+}
+
+function saveBill() {
+  const id         = document.getElementById('bl_id').value;
+  const customerId = document.getElementById('bl_customer').value;
+  const date       = document.getElementById('bl_date').value;
+  const paidStr    = document.getElementById('bl_paid').value;
+  const status     = document.getElementById('bl_status').value;
+  const note       = document.getElementById('bl_note').value.trim();
+  const errEl      = document.getElementById('bl_err');
+  errEl.textContent = '';
+  document.getElementById('bl_customer_e').textContent = '';
+  if (!customerId) { document.getElementById('bl_customer_e').textContent = 'Select a customer'; return; }
+  if (!date)       { errEl.textContent = 'Date is required'; return; }
+
+  const validRows = billItemRows.filter(r => r.productId && +r.qty > 0);
+  if (!validRows.length) { errEl.textContent = 'Add at least one product with valid qty'; return; }
+
+  const paidAmount  = Math.max(0, +paidStr || 0);
+  const totalAmount = calcBillTotal();
+  if (paidAmount > totalAmount) { errEl.textContent = 'Paid amount cannot exceed total'; return; }
+
+  // Stock validation (with reversal of old bill if editing)
+  const bills = getBills();
+  let tempStock = JSON.parse(JSON.stringify(getStock()));
+
+  if (id) {
+    const old = bills.find(b => b.id === id);
+    if (old) {
+      old.items.forEach(item => {
+        const p = PROD_MAP[item.productId];
+        if (tempStock[item.productId]) {
+          tempStock[item.productId].filled = (tempStock[item.productId].filled || 0) + item.qty;
+          if (p.returnable) tempStock[item.productId].market = Math.max(0, (tempStock[item.productId].market || 0) - item.qty);
+        }
+      });
+    }
+  }
+
+  for (const r of validRows) {
+    const avail = tempStock[r.productId]?.filled || 0;
+    if (+r.qty > avail) {
+      const pName = PROD_MAP[r.productId]?.name || r.productId;
+      errEl.textContent = `Insufficient stock for ${pName}. Available: ${avail}`;
+      return;
+    }
+  }
+
+  // Reverse old bill stock
+  if (id) {
+    const old = bills.find(b => b.id === id);
+    if (old) {
+      old.items.forEach(item => {
+        const p = PROD_MAP[item.productId];
+        stockMod(item.productId, 'filled', +item.qty);
+        if (p.returnable) stockMod(item.productId, 'market', -item.qty);
+      });
+      const idx = bills.findIndex(b => b.id === id);
+      bills[idx] = { ...bills[idx], customerId, date: new Date(date).toISOString(),
+        items: validRows.map(r => ({ productId: r.productId, qty: +r.qty, sellingPrice: +r.sellingPrice||0 })),
+        totalAmount, paidAmount, paymentStatus: status, note };
+    }
+  } else {
+    bills.push({ id: genId(), customerId, date: new Date(date).toISOString(),
+      items: validRows.map(r => ({ productId: r.productId, qty: +r.qty, sellingPrice: +r.sellingPrice||0 })),
+      totalAmount, paidAmount, paymentStatus: status, note, createdAt: new Date().toISOString() });
+  }
+
+  // Apply new stock
+  validRows.forEach(r => {
+    const p = PROD_MAP[r.productId];
+    stockMod(r.productId, 'filled', -(+r.qty));
+    if (p.returnable) stockMod(r.productId, 'market', +r.qty);
+  });
+
+  setBills(bills);
+  closeModal('billModal');
+  toast(id ? 'Bill updated successfully' : 'Bill created successfully', 'success');
+  renderPage(currentPage, viewState);
+}
+
+async function deleteBill(id) {
+  const ok = await confirm2('Delete Bill', 'Stock will be restored. This cannot be undone.', 'Delete', 'btn-danger');
+  if (!ok) return;
+  const b = getBills().find(b => b.id === id);
+  if (b) {
+    b.items.forEach(item => {
+      const p = PROD_MAP[item.productId];
+      stockMod(item.productId, 'filled', +item.qty);
+      if (p.returnable) stockMod(item.productId, 'market', -item.qty);
+    });
+  }
+  setBills(getBills().filter(b => b.id !== id));
+  toast('Bill deleted and stock restored', 'success');
+  renderPage(currentPage, viewState);
+}
+
+/* =====================================================
+   26. CUSTOMER PAYMENT
+   ===================================================== */
+function openCustPayModal(id = '', preCustId = '') {
+  document.getElementById('cspay_id').value = id;
+  document.getElementById('cspay_customer_e').textContent = '';
+  document.getElementById('cspay_amount_e').textContent   = '';
+  document.getElementById('custPayModalTitle').textContent = id ? '✏️ Edit Payment' : '💰 Record Customer Payment';
+  const custs = getCustomers();
+  document.getElementById('cspay_customer').innerHTML = '<option value="">Select customer...</option>' +
+    custs.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  if (id) {
+    const p = getCustPays().find(p => p.id === id);
+    if (!p) return;
+    document.getElementById('cspay_customer').value = p.customerId;
+    document.getElementById('cspay_amount').value   = p.amount;
+    document.getElementById('cspay_date').value     = fmt.inputDT(p.date);
+    document.getElementById('cspay_mode').value     = p.mode || 'cash';
+    document.getElementById('cspay_note').value     = p.note || '';
+  } else {
+    if (preCustId) document.getElementById('cspay_customer').value = preCustId;
+    document.getElementById('cspay_amount').value = '';
+    document.getElementById('cspay_date').value   = nowDT();
+    document.getElementById('cspay_mode').value   = 'cash';
+    document.getElementById('cspay_note').value   = '';
+  }
+  openModal('custPayModal');
+}
+
+function saveCustPayment() {
+  const id         = document.getElementById('cspay_id').value;
+  const customerId = document.getElementById('cspay_customer').value;
+  const amount     = +document.getElementById('cspay_amount').value;
+  const date       = document.getElementById('cspay_date').value;
+  const mode       = document.getElementById('cspay_mode').value;
+  const note       = document.getElementById('cspay_note').value.trim();
+  if (!customerId) { document.getElementById('cspay_customer_e').textContent = 'Select a customer'; return; }
+  if (!amount || amount <= 0) { document.getElementById('cspay_amount_e').textContent = 'Enter valid amount'; return; }
+  const pays = getCustPays();
+  if (id) {
+    const idx = pays.findIndex(p => p.id === id);
+    if (idx > -1) Object.assign(pays[idx], { customerId, amount, date: new Date(date).toISOString(), mode, note });
+  } else {
+    pays.push({ id: genId(), customerId, amount, date: new Date(date).toISOString(), mode, note, createdAt: new Date().toISOString() });
+  }
+  setCustPays(pays);
+  closeModal('custPayModal');
+  toast(id ? 'Payment updated' : 'Payment recorded', 'success');
+  renderPage(currentPage, viewState);
+}
+
+async function deleteCustPayment(id) {
+  const ok = await confirm2('Delete Payment', 'This will affect customer balance.', 'Delete', 'btn-danger');
+  if (!ok) return;
+  setCustPays(getCustPays().filter(p => p.id !== id));
+  toast('Payment deleted', 'success');
+  renderPage(currentPage, viewState);
+}
+
+/* =====================================================
+   27. MT RETURN MODAL
+   ===================================================== */
+function openMTModal(id = '', preCustId = '') {
+  document.getElementById('mt_id').value = id;
+  document.getElementById('mt_customer_e').textContent = '';
+  document.getElementById('mt_product_e').textContent  = '';
+  document.getElementById('mt_qty_e').textContent      = '';
+  document.getElementById('mt_balance_info').style.display = 'none';
+  document.getElementById('mtModalTitle').textContent  = id ? '✏️ Edit MT Return' : '↩️ Record MT Return';
+  const custs = getCustomers();
+  document.getElementById('mt_customer').innerHTML = '<option value="">Select customer...</option>' +
+    custs.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  document.getElementById('mt_product').innerHTML  = '<option value="">Select product...</option>' + RET_OPTS;
+  if (id) {
+    const r = getMTReturns().find(r => r.id === id);
+    if (!r) return;
+    document.getElementById('mt_customer').value = r.customerId;
+    document.getElementById('mt_product').value  = r.productId;
+    document.getElementById('mt_qty').value      = r.qty;
+    document.getElementById('mt_date').value     = fmt.inputDT(r.date);
+    document.getElementById('mt_note').value     = r.note || '';
+    updateMTBalanceInfo();
+  } else {
+    if (preCustId) document.getElementById('mt_customer').value = preCustId;
+    document.getElementById('mt_product').value = '';
+    document.getElementById('mt_qty').value     = '';
+    document.getElementById('mt_date').value    = nowDT();
+    document.getElementById('mt_note').value    = '';
+  }
+  openModal('mtModal');
+}
+
+function updateMTBalanceInfo() {
+  const cid   = document.getElementById('mt_customer').value;
+  const pid   = document.getElementById('mt_product').value;
+  const infoEl= document.getElementById('mt_balance_info');
+  const retId = document.getElementById('mt_id').value;
+  if (!cid || !pid) { infoEl.style.display = 'none'; return; }
+  let bal = custBottleBalance(cid, pid);
+  if (retId) {
+    const old = getMTReturns().find(r => r.id === retId);
+    if (old && old.customerId === cid && old.productId === pid) bal += old.qty;
+  }
+  infoEl.style.display = 'block';
+  infoEl.textContent = `Customer's ${PROD_MAP[pid]?.name||''} balance: ${bal} bottles pending return`;
+}
+
+function saveMTReturn() {
+  const id         = document.getElementById('mt_id').value;
+  const customerId = document.getElementById('mt_customer').value;
+  const productId  = document.getElementById('mt_product').value;
+  const qty        = +document.getElementById('mt_qty').value;
+  const date       = document.getElementById('mt_date').value;
+  const note       = document.getElementById('mt_note').value.trim();
+  document.getElementById('mt_customer_e').textContent = '';
+  document.getElementById('mt_product_e').textContent  = '';
+  document.getElementById('mt_qty_e').textContent      = '';
+  if (!customerId) { document.getElementById('mt_customer_e').textContent = 'Select a customer'; return; }
+  if (!productId)  { document.getElementById('mt_product_e').textContent  = 'Select a product'; return; }
+  if (!qty || qty < 1) { document.getElementById('mt_qty_e').textContent = 'Enter qty > 0'; return; }
+
+  const rets = getMTReturns();
+  let availBal = custBottleBalance(customerId, productId);
+  if (id) {
+    const old = rets.find(r => r.id === id);
+    if (old && old.customerId === customerId && old.productId === productId) availBal += old.qty;
+  }
+  if (qty > availBal) { document.getElementById('mt_qty_e').textContent = `Cannot exceed balance (${availBal})`; return; }
+
+  if (id) {
+    const old = rets.find(r => r.id === id);
+    if (old) { stockMod(old.productId, 'mt', -old.qty); stockMod(old.productId, 'market', +old.qty); }
+    const idx = rets.findIndex(r => r.id === id);
+    rets[idx] = { ...rets[idx], customerId, productId, qty, date: new Date(date).toISOString(), note };
+  } else {
+    rets.push({ id: genId(), customerId, productId, qty, date: new Date(date).toISOString(), note, createdAt: new Date().toISOString() });
+  }
+  stockMod(productId, 'mt',     +qty);
+  stockMod(productId, 'market', -qty);
+  setMTReturns(rets);
+  closeModal('mtModal');
+  toast(id ? 'MT return updated' : 'MT return recorded', 'success');
+  renderPage(currentPage, viewState);
+}
+
+async function deleteMTReturn(id) {
+  const ok = await confirm2('Delete MT Return', 'Stock will be reversed. Continue?', 'Delete', 'btn-danger');
+  if (!ok) return;
+  const r = getMTReturns().find(r => r.id === id);
+  if (r) { stockMod(r.productId, 'mt', -r.qty); stockMod(r.productId, 'market', +r.qty); }
+  setMTReturns(getMTReturns().filter(r => r.id !== id));
+  toast('MT return deleted', 'success');
+  renderPage(currentPage, viewState);
+}
+
+/* =====================================================
+   28. STOCK ADJUST MODAL
+   ===================================================== */
+function openStockAdjModal(pid = '') {
+  document.getElementById('adj_err').textContent   = '';
+  document.getElementById('adj_info').style.display= 'none';
+  document.getElementById('adj_product').innerHTML = '<option value="">Select product...</option>' + ALL_OPTS;
+  if (pid) { document.getElementById('adj_product').value = pid; onAdjProductChange(); }
+  document.getElementById('adj_qty').value    = '';
+  document.getElementById('adj_action').value = 'set';
+  document.getElementById('adj_field').value  = 'filled';
+  openModal('stockAdjModal');
+}
+
+function onAdjProductChange() {
+  const pid    = document.getElementById('adj_product').value;
+  const infoEl = document.getElementById('adj_info');
+  const fldSel = document.getElementById('adj_field');
+  if (!pid) { infoEl.style.display = 'none'; return; }
+  const p = PROD_MAP[pid];
+  const s = getStock()[pid] || {};
+  fldSel.innerHTML = `<option value="filled">Filled Stock (current: ${s.filled||0})</option>`;
+  if (p.returnable) {
+    fldSel.innerHTML += `<option value="mt">MT Stock (current: ${s.mt||0})</option>`;
+    fldSel.innerHTML += `<option value="market">Market Stock (current: ${s.market||0})</option>`;
+  }
+  infoEl.style.display = 'block';
+  infoEl.textContent = p.returnable
+    ? `Current → Filled: ${s.filled||0} | MT: ${s.mt||0} | Market: ${s.market||0}`
+    : `Current Filled Stock: ${s.filled||0}`;
+}
+
+function applyStockAdj() {
+  const pid    = document.getElementById('adj_product').value;
+  const field  = document.getElementById('adj_field').value;
+  const action = document.getElementById('adj_action').value;
+  const qty    = +document.getElementById('adj_qty').value;
+  const errEl  = document.getElementById('adj_err');
+  errEl.textContent = '';
+  if (!pid)          { errEl.textContent = 'Select a product'; return; }
+  if (isNaN(qty) || qty < 0) { errEl.textContent = 'Enter a valid quantity'; return; }
+  const cur = stockGet(pid, field);
+  let newVal;
+  if (action === 'set') newVal = qty;
+  else if (action === 'add') newVal = cur + qty;
+  else newVal = cur - qty;
+  if (newVal < 0) { errEl.textContent = 'Stock cannot go below zero'; return; }
+  stockSet(pid, field, newVal);
+  closeModal('stockAdjModal');
+  toast(`Stock adjusted: ${PROD_MAP[pid].name} ${field} → ${newVal}`, 'success');
+  renderPage(currentPage, viewState);
+}
+
+/* =====================================================
+   29. INVOICE SYSTEM
+   ===================================================== */
+function viewInvoice(billId) {
+  const bill = getBills().find(b => b.id === billId);
+  if (!bill) { toast('Bill not found', 'error'); return; }
+  const customer  = getCustomers().find(c => c.id === bill.customerId);
+  const settings  = getSettings();
+  const remaining = bill.totalAmount - bill.paidAmount;
+
+  // Build invoice HTML (purchase prices NOT included)
+  const rows = bill.items.map((item, i) => {
+    const p       = PROD_MAP[item.productId];
+    const total   = item.qty * (item.sellingPrice || 0);
+    return `<tr>
+      <td style="padding:9px 12px;border-bottom:1px solid #f1f5f9">${i+1}</td>
+      <td style="padding:9px 12px;border-bottom:1px solid #f1f5f9;font-weight:600">${p?.name||'Unknown'}</td>
+      <td style="padding:9px 12px;border-bottom:1px solid #f1f5f9;text-align:right">${item.qty}</td>
+      <td style="padding:9px 12px;border-bottom:1px solid #f1f5f9;text-align:right">₹${(item.sellingPrice||0).toFixed(2)}</td>
+      <td style="padding:9px 12px;border-bottom:1px solid #f1f5f9;text-align:right;font-weight:700">₹${total.toFixed(2)}</td>
+    </tr>`;
+  }).join('');
+
+  const smap = { paid: '#059669', partial: '#d97706', unpaid: '#dc2626' };
+
+  const invoiceHTML = `
+  <div class="invoice-paper" id="invoiceForPrint">
+    <div class="inv-header">
+      <div class="inv-company">${settings.companyName || 'Smooth Vendor Management Pvt Ltd'}</div>
+      <div class="inv-tagline">Water Distribution Business</div>
+      <div class="inv-meta">
+        <div>${settings.address || ''}</div>
+        <div>${settings.phone ? '📞 ' + settings.phone : ''}${settings.gst ? ' | GST: ' + settings.gst : ''}</div>
+      </div>
+    </div>
+    <div class="inv-body">
+      <div class="inv-cust-row">
+        <div>
+          <div class="inv-cust-lbl">Bill To</div>
+          <div class="inv-cust-val">${customer?.name || 'Unknown'}</div>
+          ${customer?.phone ? `<div style="font-size:12px;color:var(--t2);margin-top:2px">📞 ${customer.phone}</div>` : ''}
+          ${customer?.address ? `<div style="font-size:12px;color:var(--t2)">${customer.address}</div>` : ''}
+        </div>
+        <div style="text-align:right">
+          <div class="inv-cust-lbl">Invoice Details</div>
+          <div style="font-size:13px"><strong>Bill ID:</strong> ${billIdDisplay(bill.id)}</div>
+          <div style="font-size:13px"><strong>Date:</strong> ${fmt.dateOnly(bill.date)}</div>
+          <div style="margin-top:6px">
+            <span style="background:${smap[bill.paymentStatus]||'#64748b'};color:#fff;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:700;text-transform:uppercase">${bill.paymentStatus}</span>
+          </div>
+        </div>
+      </div>
+      <table class="inv-table">
+        <thead>
+          <tr>
+            <th style="padding:9px 12px;background:#f1f5f9;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--t2);border-bottom:2px solid var(--border)">#</th>
+            <th style="padding:9px 12px;background:#f1f5f9;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--t2);border-bottom:2px solid var(--border)">Product</th>
+            <th style="padding:9px 12px;background:#f1f5f9;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--t2);border-bottom:2px solid var(--border);text-align:right">Qty</th>
+            <th style="padding:9px 12px;background:#f1f5f9;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--t2);border-bottom:2px solid var(--border);text-align:right">Rate</th>
+            <th style="padding:9px 12px;background:#f1f5f9;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--t2);border-bottom:2px solid var(--border);text-align:right">Amount</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="inv-total-section">
+        <div class="inv-total-box">
+          <div class="inv-total-row"><span>Subtotal</span><span>₹${bill.totalAmount.toFixed(2)}</span></div>
+          <div class="inv-total-row inv-grand"><span>Grand Total</span><span>₹${bill.totalAmount.toFixed(2)}</span></div>
+        </div>
+      </div>
+      <div class="inv-payment-note">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+          <div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--t2);margin-bottom:3px">Total Amount</div>
+            <div style="font-size:16px;font-weight:800">₹${bill.totalAmount.toFixed(2)}</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--t2);margin-bottom:3px">Amount Paid</div>
+            <div style="font-size:16px;font-weight:800;color:var(--success)">₹${bill.paidAmount.toFixed(2)}</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--t2);margin-bottom:3px">Balance Due</div>
+            <div style="font-size:16px;font-weight:800;color:${remaining > 0 ? 'var(--danger)' : 'var(--success)'}">₹${remaining.toFixed(2)}</div>
+          </div>
+        </div>
+        ${bill.note ? `<div style="margin-top:10px;font-size:12px;color:var(--t2)"><strong>Note:</strong> ${bill.note}</div>` : ''}
+      </div>
+    </div>
+    <div class="inv-footer">${settings.footer || 'Thank you for your business!'}</div>
+  </div>`;
+
+  document.getElementById('invoicePreviewBody').innerHTML = invoiceHTML;
+  openModal('invoiceModal');
+}
+
+function printInvoice() {
+  const content = document.getElementById('invoiceForPrint').outerHTML;
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>Invoice</title>
+  <style>
+    body{font-family:'Segoe UI',system-ui,sans-serif;margin:0;padding:20px;color:#0f172a}
+    .invoice-paper{max-width:680px;margin:0 auto}
+    .inv-header{background:#0a3d91;color:#fff;padding:24px 28px;border-radius:12px 12px 0 0}
+    .inv-company{font-size:20px;font-weight:800}
+    .inv-tagline{font-size:11px;opacity:.7;margin-top:3px}
+    .inv-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:16px;font-size:12px;opacity:.85}
+    .inv-body{padding:24px 28px}
+    .inv-cust-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px}
+    .inv-cust-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#475569;margin-bottom:4px}
+    .inv-cust-val{font-size:14px;font-weight:700}
+    table{width:100%;border-collapse:collapse;margin-bottom:16px}
+    th{background:#f1f5f9;padding:9px 12px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#475569;border-bottom:2px solid #e2e8f0}
+    td{padding:9px 12px;border-bottom:1px solid #f1f5f9;font-size:13px}
+    .inv-total-section{border-top:2px solid #e2e8f0;padding-top:14px;display:flex;justify-content:flex-end}
+    .inv-total-row{display:flex;justify-content:space-between;padding:4px 0;font-size:13px}
+    .inv-grand{font-size:16px;font-weight:800;color:#0a3d91;border-top:2px solid #e2e8f0;padding-top:8px;margin-top:4px}
+    .inv-payment-note{background:#f8faff;border-radius:8px;padding:14px 16px;margin-top:14px;border:1px solid #e2e8f0}
+    .inv-footer{text-align:center;font-size:11px;color:#475569;padding:16px 28px;border-top:1px solid #e2e8f0}
+    @media print{body{padding:0}}
+  </style></head><body>${content}</body></html>`);
+  w.document.close();
+  setTimeout(() => { w.print(); }, 400);
+}
+
+function downloadInvoicePDF() {
+  printInvoice(); // Opens print dialog which allows saving as PDF
+  toast('Use browser print dialog → Save as PDF', 'info');
+}
+
+/* =====================================================
+   30. TABS HELPER
+   ===================================================== */
+function initTabs() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.closest('.card') || btn.closest('.page');
+      group.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      group.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel = group.querySelector(`#${btn.dataset.tab}`);
+      if (panel) panel.classList.add('active');
+    });
+  });
+}
+
+/* =====================================================
+   31. RESET ALL
+   ===================================================== */
+async function doResetAll() {
+  const ok = await confirm2(
+    '⚠️ Reset ALL Data',
+    'This will permanently delete ALL companies, customers, bills, purchases, payments, and stock. This CANNOT be undone!',
+    '🗑️ Reset Everything', 'btn-danger'
+  );
+  if (!ok) return;
+  const keys = ['svm_stock','svm_prices','svm_companies','svm_purchases','svm_cpays','svm_customers','svm_bills','svm_custpays','svm_mt'];
+  keys.forEach(k => localStorage.removeItem(k));
+  ensureStock(); ensurePrices();
+  toast('All data has been reset', 'warning');
+  navigate('dashboard');
+}
+
+/* =====================================================
+   32. CLOCK
+   ===================================================== */
+function updateClock() {
+  const el = document.getElementById('clock');
+  if (el) el.textContent = new Date().toLocaleString('en-IN', {
+    weekday:'short', day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'
+  });
+}
+
+
+/* =====================================================
+   MOBILE NAVIGATION FUNCTIONS
+   ===================================================== */
+
+function toggleMobSidebar() {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  const open = sb.classList.contains('mob-open');
+  sb.classList.toggle('mob-open', !open);
+  ov.classList.toggle('show', !open);
+}
+
+function closeMobSidebar() {
+  document.getElementById('sidebar').classList.remove('mob-open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+}
+
+function toggleBnMore() {
+  document.getElementById('bnMoreMenu').classList.toggle('show');
+}
+
+function bnNav(page) {
+  document.getElementById('bnMoreMenu').classList.remove('show');
+  syncBottomNav(page);
+  navigate(page);
+}
+
+function syncBottomNav(page) {
+  document.querySelectorAll('.bn-item[data-page]').forEach(el => {
+    el.classList.toggle('active', el.dataset.page === page);
+  });
+  // More button active if page is in the more menu
+  const morePages = ['companies','mt-manager','profit','prices','settings'];
+  const moreBtn = document.getElementById('bnMoreBtn');
+  if (moreBtn) moreBtn.classList.toggle('active', morePages.includes(page));
+}
+
+// Close more menu on outside click
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('bnMoreMenu');
+  const btn  = document.getElementById('bnMoreBtn');
+  if (menu && menu.classList.contains('show')) {
+    if (!menu.contains(e.target) && btn && !btn.contains(e.target)) {
+      menu.classList.remove('show');
+    }
+  }
+});
+
+/* =====================================================
+   33. INIT
+   ===================================================== */
+function init() {
+  ensureStock();
+  ensurePrices();
+  navigate('dashboard');
+  updateClock();
+  setInterval(updateClock, 30000);
+}
+
+init();
+</script>
+</body>
+</html>
